@@ -26,27 +26,45 @@
     </button>
   </header>
 
-  <section class="hero layout-shell" aria-label="Destaques do atendimento">
-    <p class="hero-kicker">Cardápio digital do Tobia's Lanches</p>
-    <h2 class="hero-title">Peça rápido e sem complicação.</h2>
-    <p class="hero-subtitle">Delivery, retirada e pedido no local com confirmação no WhatsApp.</p>
-    <ul class="hero-chips">
-      <li class="chip">Delivery</li>
-      <li class="chip">Retirada</li>
-      <li class="chip">20 a 40 min</li>
-      <li class="chip">PIX, Cartão e Dinheiro</li>
-    </ul>
-  </section>
-
-  <section class="faixa-operacao layout-shell" aria-live="polite">
-    <div class="painel-horario">
-      <div class="painel-horario-topo">
-        <p class="titulo-horario">Horário da lanchonete</p>
-        <p id="statusLoja" class="status-loja"></p>
+  <section class="topo-blocos layout-shell" aria-label="Resumo inicial">
+    <section class="hero" aria-label="Destaques do atendimento">
+      <p class="hero-kicker">Cardápio digital do Tobia's Lanches</p>
+      <h2 class="hero-title">Peça rápido e sem complicação.</h2>
+      <p class="hero-subtitle">Delivery, retirada e pedido no local com confirmação no WhatsApp.</p>
+      <div class="hero-metas" aria-label="Informações rápidas">
+        <span class="hero-meta">Tempo médio: 20 a 40 min</span>
+        <span class="hero-meta">Pagamento: PIX, cartão e dinheiro</span>
       </div>
-      <p id="detalheHorario" class="detalhe-horario"></p>
-      <p class="agenda-horario">Funcionamento: carregando...</p>
-    </div>
+      <ul class="hero-chips">
+        <li class="chip">Delivery</li>
+        <li class="chip">Retirada</li>
+        <li class="chip">No local</li>
+      </ul>
+    </section>
+
+    <section class="faixa-operacao" aria-live="polite">
+      <div class="painel-horario">
+        <div class="painel-horario-topo">
+          <div class="painel-horario-head">
+            <p class="titulo-horario">Horários de funcionamento</p>
+            <p class="horario-ajuda">Atualizado automaticamente</p>
+          </div>
+          <p id="statusLoja" class="status-loja" aria-live="polite" role="status"></p>
+        </div>
+        <div class="painel-horario-grade">
+          <div class="horario-bloco">
+            <p class="rotulo-horario">Próximo horário</p>
+            <p id="detalheHorario" class="detalhe-horario"></p>
+          </div>
+          <div class="horario-bloco">
+            <p class="rotulo-horario">Agenda semanal</p>
+            <ul class="agenda-horario" aria-label="Agenda semanal">
+              <li class="agenda-mensagem">Carregando horários...</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
   </section>
 
   <nav id="menuCategorias" class="menu-categorias layout-shell" aria-label="Categorias do cardápio"></nav>
@@ -62,159 +80,163 @@
 
   <section id="caixaCarrinho" class="fundo-escuro" tabindex="-1" hidden inert>
     <div class="caixa-centro caixa-carrinho" role="dialog" aria-modal="true" aria-labelledby="tituloCarrinho">
-      <button id="botaoFecharCarrinhoTopo" class="botao-fechar-modal" type="button"
-        aria-label="Fechar carrinho">&times;</button>
       <h2 class="titulo-caixa" id="tituloCarrinho">Carrinho e Checkout</h2>
-      <p id="carrinhoSubtitulo" class="carrinho-subtitulo">Seu carrinho está vazio.</p>
-      <div id="resumoTopoCarrinho" class="resumo-topo-carrinho" aria-live="polite">
-        <span id="resumoTopoItens">0 item</span>
-        <strong id="resumoTopoSubtotal">Subtotal: R$ 0,00</strong>
-      </div>
+      <div class="carrinho-conteudo">
+        <p id="carrinhoSubtitulo" class="carrinho-subtitulo">Seu carrinho está vazio.</p>
+        <div id="resumoTopoCarrinho" class="resumo-topo-carrinho" aria-live="polite">
+          <span id="resumoTopoItens">Itens: 0 item</span>
+          <strong id="resumoTopoSubtotal">Subtotal: R$ 0,00</strong>
+        </div>
 
-      <section class="painel-carrinho" aria-label="Itens do carrinho">
-        <ul id="listaCarrinho"></ul>
-      </section>
-      <section class="totais-carrinho" aria-label="Resumo financeiro do pedido">
-        <p id="resumoPedido" class="resumo-pedido"></p>
-        <p id="valorTotal"></p>
-      </section>
+        <div class="cart-card">
+          <p class="cart-section-title">Itens do pedido</p>
+          <section class="painel-carrinho" aria-label="Itens do carrinho">
+            <ul id="listaCarrinho"></ul>
+          </section>
+          <p class="cart-section-title">Resumo do pedido</p>
+          <section class="totais-carrinho" aria-label="Resumo financeiro do pedido">
+            <p id="resumoPedido" class="resumo-pedido"></p>
+            <p id="valorTotal"></p>
+          </section>
+        </div>
 
-      <form id="formCliente" novalidate>
-        <fieldset class="bloco-form">
-          <legend>1. Tipo de atendimento</legend>
-          <div class="segmented" role="radiogroup" aria-label="Tipo de atendimento">
-            <label class="segmented-item">
-              <input type="radio" name="tipoAtendimento" value="delivery" checked>
-              <span>Delivery</span>
-            </label>
-            <label class="segmented-item">
-              <input type="radio" name="tipoAtendimento" value="no_local">
-              <span>No Local</span>
-            </label>
-          </div>
-        </fieldset>
+        <form id="formCliente" novalidate>
+          <fieldset class="bloco-form">
+            <legend>1. Tipo de atendimento</legend>
+            <div class="segmented" role="radiogroup" aria-label="Tipo de atendimento">
+              <label class="segmented-item">
+                <input type="radio" name="tipoAtendimento" value="delivery" checked>
+                <span>Delivery</span>
+              </label>
+              <label class="segmented-item">
+                <input type="radio" name="tipoAtendimento" value="no_local">
+                <span>No Local</span>
+              </label>
+            </div>
+          </fieldset>
 
-        <fieldset class="bloco-form" id="blocoDelivery">
-          <legend>2. Pedido via site</legend>
-          <label for="tipoEntrega">Pedido para:</label>
-          <select id="tipoEntrega" data-erro-id="erroTipoEntrega" aria-describedby="ajudaTipoEntrega erroTipoEntrega"
-            required>
-            <option value="">Selecione</option>
-            <option value="entrega">Entrega</option>
-            <option value="retirada">Retirada no local</option>
-          </select>
-          <p id="ajudaTipoEntrega" class="ajuda-texto">Escolha entrega para receber no endereço ou retirada para buscar
-            no quiosque.</p>
-          <p id="erroTipoEntrega" class="erro erro-campo oculto"></p>
-
-          <p class="aviso tempo-espera">Tempo aproximado: 20 a 40 minutos.</p>
-          <div id="camposEntrega" class="painel-condicional oculto">
-            <label for="bairroEntrega">Localidade de entrega (Iracema - CE):</label>
-            <select id="bairroEntrega" data-erro-id="erroBairroEntrega" aria-describedby="erroBairroEntrega">
-              <option value="">Selecione a localidade</option>
+          <fieldset class="bloco-form" id="blocoDelivery">
+            <legend>2. Pedido via site</legend>
+            <label for="tipoEntrega">Pedido para:</label>
+            <select id="tipoEntrega" data-erro-id="erroTipoEntrega" aria-describedby="ajudaTipoEntrega erroTipoEntrega"
+              required>
+              <option value="">Selecione</option>
+              <option value="entrega">Entrega</option>
+              <option value="retirada">Retirada no local</option>
             </select>
-            <p id="erroBairroEntrega" class="erro erro-campo oculto"></p>
+            <p id="ajudaTipoEntrega" class="ajuda-texto">Escolha entrega para receber no endereço ou retirada para buscar
+              no quiosque.</p>
+            <p id="erroTipoEntrega" class="erro erro-campo oculto"></p>
 
-            <label for="enderecoEntrega">Endereço para entrega:</label>
-            <input type="text" id="enderecoEntrega" data-erro-id="erroEnderecoEntrega"
-              aria-describedby="erroEnderecoEntrega" placeholder="Rua, número e complemento">
-            <p id="erroEnderecoEntrega" class="erro erro-campo oculto"></p>
+            <p class="aviso tempo-espera">Tempo aproximado: 20 a 40 minutos.</p>
+            <div id="camposEntrega" class="painel-condicional oculto">
+              <label for="bairroEntrega">Localidade de entrega (Iracema - CE):</label>
+              <select id="bairroEntrega" data-erro-id="erroBairroEntrega" aria-describedby="erroBairroEntrega">
+                <option value="">Selecione a localidade</option>
+              </select>
+              <p id="erroBairroEntrega" class="erro erro-campo oculto"></p>
 
-            <label for="referencia">Ponto de referência:</label>
-            <input type="text" id="referencia" placeholder="Ex.: perto da praça">
+              <label for="enderecoEntrega">Endereço para entrega:</label>
+              <input type="text" id="enderecoEntrega" data-erro-id="erroEnderecoEntrega"
+                aria-describedby="erroEnderecoEntrega" placeholder="Rua, número e complemento">
+              <p id="erroEnderecoEntrega" class="erro erro-campo oculto"></p>
 
-            <p id="taxaEntregaInfo" class="aviso taxa"></p>
-            <p id="bloqueioEntregaInfo" class="erro oculto" role="alert"></p>
-          </div>
+              <label for="referencia">Ponto de referência:</label>
+              <input type="text" id="referencia" placeholder="Ex.: perto da praça">
 
-          <div id="enderecoRetirada" class="painel-condicional oculto">
-            <p class="aviso aviso-retirada">
-              <strong>Retirada no local:</strong><br>
-              Carregando endereço...
-            </p>
-          </div>
-        </fieldset>
-
-        <fieldset class="bloco-form oculto" id="blocoNoLocal">
-          <legend>2. Pedido no local</legend>
-          <p class="aviso tempo-espera">Tempo aproximado: 20 a 40 minutos.</p>
-          <label for="numeroMesa">Número da mesa:</label>
-          <input type="number" id="numeroMesa" min="1" step="1" data-erro-id="erroNumeroMesa"
-            aria-describedby="erroNumeroMesa" placeholder="Ex.: 3">
-          <p id="erroNumeroMesa" class="erro erro-campo oculto"></p>
-        </fieldset>
-
-        <fieldset class="bloco-form">
-          <legend>3. Dados do cliente</legend>
-          <label for="nome">Nome completo:</label>
-          <input type="text" id="nome" autocomplete="name" data-erro-id="erroNome" aria-describedby="ajudaNome erroNome"
-            required>
-          <p id="ajudaNome" class="ajuda-texto">Informe o nome usado para identificação do pedido.</p>
-          <p id="erroNome" class="erro erro-campo oculto"></p>
-
-          <label for="telefone">Telefone ou WhatsApp:</label>
-          <input type="tel" id="telefone" inputmode="tel" autocomplete="tel" data-erro-id="erroTelefone"
-            aria-describedby="ajudaTelefone erroTelefone" placeholder="(88) 98888-7777" required>
-          <p id="ajudaTelefone" class="ajuda-texto">Use DDD + número. Exemplo: (88) 98888-7777.</p>
-          <p id="erroTelefone" class="erro erro-campo oculto"></p>
-        </fieldset>
-
-        <fieldset class="bloco-form">
-          <legend>4. Pagamento</legend>
-          <label for="pagamento">Forma de pagamento:</label>
-          <select id="pagamento" data-erro-id="erroPagamento" aria-describedby="erroPagamento" required>
-            <option value="">Selecione</option>
-            <option value="Pix">Pix</option>
-            <option value="Dinheiro">Dinheiro</option>
-            <option value="Cartão">Cartão</option>
-          </select>
-          <p id="erroPagamento" class="erro erro-campo oculto"></p>
-
-          <div id="pixInfo" class="painel-condicional oculto">
-            <div class="pix-card">
-              <p class="pix-titulo">Dados do PIX</p>
-              <p class="pix-linha"><strong>Chave:</strong> <span id="chavePixTexto" class="pix-valor">-</span></p>
-              <p class="pix-linha"><strong>Titular:</strong> <span id="pixTitularTexto" class="pix-valor">-</span></p>
-              <p class="pix-linha"><strong>Banco:</strong> <span id="pixBancoTexto" class="pix-valor">-</span></p>
+              <p id="taxaEntregaInfo" class="aviso taxa"></p>
+              <p id="bloqueioEntregaInfo" class="erro oculto" role="alert"></p>
             </div>
-            <button type="button" id="botaoCopiarPix" class="botao botao-secundario">Copiar chave PIX</button>
-            <p id="mensagemCopiaPix" class="sucesso oculto" role="status">Chave PIX copiada.</p>
-            <p id="mensagemErroCopiaPix" class="erro oculto" role="alert"></p>
-          </div>
 
-          <div id="trocoInfo" class="painel-condicional oculto">
+            <div id="enderecoRetirada" class="painel-condicional oculto">
+              <p class="aviso aviso-retirada">
+                <strong>Retirada no local:</strong><br>
+                Carregando endereço...
+              </p>
+            </div>
+          </fieldset>
+
+          <fieldset class="bloco-form oculto" id="blocoNoLocal">
+            <legend>2. Pedido no local</legend>
+            <p class="aviso tempo-espera">Tempo aproximado: 20 a 40 minutos.</p>
+            <label for="numeroMesa">Número da mesa:</label>
+            <input type="number" id="numeroMesa" min="1" step="1" data-erro-id="erroNumeroMesa"
+              aria-describedby="erroNumeroMesa" placeholder="Ex.: 3">
+            <p id="erroNumeroMesa" class="erro erro-campo oculto"></p>
+          </fieldset>
+
+          <fieldset class="bloco-form">
+            <legend>3. Dados do cliente</legend>
+            <label for="nome">Nome completo:</label>
+            <input type="text" id="nome" autocomplete="name" data-erro-id="erroNome" aria-describedby="ajudaNome erroNome"
+              required>
+            <p id="ajudaNome" class="ajuda-texto">Informe o nome usado para identificação do pedido.</p>
+            <p id="erroNome" class="erro erro-campo oculto"></p>
+
+            <label for="telefone">Telefone ou WhatsApp:</label>
+            <input type="tel" id="telefone" inputmode="tel" autocomplete="tel" data-erro-id="erroTelefone"
+              aria-describedby="ajudaTelefone erroTelefone" placeholder="(88) 98888-7777" required>
+            <p id="ajudaTelefone" class="ajuda-texto">Use DDD + número. Exemplo: (88) 98888-7777.</p>
+            <p id="erroTelefone" class="erro erro-campo oculto"></p>
+          </fieldset>
+
+          <fieldset class="bloco-form">
+            <legend>4. Pagamento</legend>
+            <label for="pagamento">Forma de pagamento:</label>
+            <select id="pagamento" data-erro-id="erroPagamento" aria-describedby="erroPagamento" required>
+              <option value="">Selecione</option>
+              <option value="Pix">Pix</option>
+              <option value="Dinheiro">Dinheiro</option>
+              <option value="Cartão">Cartão</option>
+            </select>
+            <p id="erroPagamento" class="erro erro-campo oculto"></p>
+
+            <div id="pixInfo" class="painel-condicional oculto">
+              <div class="pix-card">
+                <p class="pix-titulo">Dados do PIX</p>
+                <p class="pix-linha"><strong>Chave:</strong> <span id="chavePixTexto" class="pix-valor">-</span></p>
+                <p class="pix-linha"><strong>Titular:</strong> <span id="pixTitularTexto" class="pix-valor">-</span></p>
+                <p class="pix-linha"><strong>Banco:</strong> <span id="pixBancoTexto" class="pix-valor">-</span></p>
+              </div>
+              <button type="button" id="botaoCopiarPix" class="botao botao-secundario">Copiar chave PIX</button>
+              <p id="mensagemCopiaPix" class="sucesso oculto" role="status">Chave PIX copiada.</p>
+              <p id="mensagemErroCopiaPix" class="erro oculto" role="alert"></p>
+            </div>
+
+            <div id="trocoInfo" class="painel-condicional oculto">
+              <label class="checkbox-linha">
+                <input type="checkbox" id="precisaTroco">
+                Precisa de troco?
+              </label>
+
+              <div id="trocoParaBox" class="oculto">
+                <label for="trocoPara">Troco para quanto?</label>
+                <input type="number" id="trocoPara" min="0" step="0.01" data-erro-id="erroTrocoPara"
+                  aria-describedby="erroTrocoPara" placeholder="Ex.: 50">
+                <p id="erroTrocoPara" class="erro erro-campo oculto"></p>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="bloco-form">
+            <legend>5. Observações</legend>
+            <label for="observacoes">Detalhes do pedido:</label>
+            <textarea id="observacoes" placeholder="Ex.: sem cebola, sem verdura, etc."></textarea>
+          </fieldset>
+
+          <fieldset class="bloco-form">
+            <legend>6. Consentimento</legend>
             <label class="checkbox-linha">
-              <input type="checkbox" id="precisaTroco">
-              Precisa de troco?
+              <input type="checkbox" id="aceiteLgpd" data-erro-id="erroAceiteLgpd" aria-describedby="erroAceiteLgpd">
+              Autorizo o uso dos meus dados para contato e processamento deste pedido.
             </label>
+            <p id="erroAceiteLgpd" class="erro erro-campo oculto"></p>
+          </fieldset>
 
-            <div id="trocoParaBox" class="oculto">
-              <label for="trocoPara">Troco para quanto?</label>
-              <input type="number" id="trocoPara" min="0" step="0.01" data-erro-id="erroTrocoPara"
-                aria-describedby="erroTrocoPara" placeholder="Ex.: 50">
-              <p id="erroTrocoPara" class="erro erro-campo oculto"></p>
-            </div>
-          </div>
-        </fieldset>
-
-        <fieldset class="bloco-form">
-          <legend>5. Observações</legend>
-          <label for="observacoes">Detalhes do pedido:</label>
-          <textarea id="observacoes" placeholder="Ex.: sem cebola, sem verdura, etc."></textarea>
-        </fieldset>
-
-        <fieldset class="bloco-form">
-          <legend>6. Consentimento</legend>
-          <label class="checkbox-linha">
-            <input type="checkbox" id="aceiteLgpd" data-erro-id="erroAceiteLgpd" aria-describedby="erroAceiteLgpd">
-            Autorizo o uso dos meus dados para contato e processamento deste pedido.
-          </label>
-          <p id="erroAceiteLgpd" class="erro erro-campo oculto"></p>
-        </fieldset>
-
-        <button type="submit" class="sr-only" tabindex="-1">Enviar pedido</button>
-        <p id="mensagemErro" class="erro oculto" role="alert" tabindex="-1"></p>
-      </form>
+          <button type="submit" class="sr-only" tabindex="-1">Enviar pedido</button>
+          <p id="mensagemErro" class="erro oculto" role="alert" tabindex="-1"></p>
+        </form>
+      </div>
 
       <div class="botoes-carrinho acoes-checkout">
         <button id="botaoFinalizar" class="botao botao-principal" type="button">Finalizar Pedido</button>
@@ -511,7 +533,6 @@
     const resumoTopoSubtotal = document.getElementById("resumoTopoSubtotal");
     const contadorCarrinho = document.getElementById("quantidadeCarrinho");
     const botaoCarrinho = document.getElementById("botaoCarrinho");
-    const botaoFecharCarrinhoTopo = document.getElementById("botaoFecharCarrinhoTopo");
     const botaoFechar = document.getElementById("botaoFechar");
     const botaoFinalizar = document.getElementById("botaoFinalizar");
     const mensagemErro = document.getElementById("mensagemErro");
@@ -822,14 +843,17 @@
         .filter((dia) => Number.isFinite(dia))
         .sort((a, b) => a - b);
       if (dias.length === 0) {
-        agendaHorario.textContent = "Funcionamento: consulte horários.";
+        agendaHorario.innerHTML = "<li class=\"agenda-mensagem\">Consulte horários.</li>";
         return;
       }
       const linhas = dias.map((dia) => {
         const agenda = horarioFuncionamento[dia];
-        return `${nomesDiasSemana[dia]}: ${agenda.abre} às ${agenda.fecha}`;
+        const nomeDia = escaparHtml(nomesDiasSemana[dia]);
+        const abre = escaparHtml(agenda.abre);
+        const fecha = escaparHtml(agenda.fecha);
+        return `<li><span class="agenda-dia">${nomeDia}</span><span class="agenda-hora">${abre} às ${fecha}</span></li>`;
       });
-      agendaHorario.textContent = `Funcionamento: ${linhas.join(" | ")}.`;
+      agendaHorario.innerHTML = linhas.join("");
     }
 
     function atualizarMapasCategorias(categorias) {
@@ -1285,14 +1309,26 @@
     function atualizarResumoValores() {
       const { subtotal, taxa, total } = calcularTotaisPedido();
       const quantidadeTotal = carrinho.reduce((acumulador, item) => acumulador + item.quantidade, 0);
-      resumoPedido.textContent = `Subtotal: ${formatarMoeda(subtotal)} | Taxa de entrega: ${formatarMoeda(taxa)}`;
-      valorTotal.textContent = `Total: ${formatarMoeda(total)}`;
+      resumoPedido.innerHTML = `
+        <span class="resumo-linha">
+          <span>Subtotal</span>
+          <strong>${formatarMoeda(subtotal)}</strong>
+        </span>
+        <span class="resumo-linha">
+          <span>Taxa de entrega</span>
+          <strong>${formatarMoeda(taxa)}</strong>
+        </span>
+      `;
+      valorTotal.innerHTML = `
+        <span>Total</span>
+        <strong>${formatarMoeda(total)}</strong>
+      `;
       totalBarraMobile.textContent = formatarMoeda(total);
       contadorCarrinho.textContent = quantidadeTotal;
       carrinhoSubtitulo.textContent = quantidadeTotal === 0
         ? "Seu carrinho está vazio."
         : `${quantidadeTotal} item${quantidadeTotal > 1 ? "s" : ""} no carrinho.`;
-      resumoTopoItens.textContent = `${quantidadeTotal} item${quantidadeTotal > 1 ? "s" : ""}`;
+      resumoTopoItens.textContent = `Itens: ${quantidadeTotal} item${quantidadeTotal > 1 ? "s" : ""}`;
       resumoTopoSubtotal.textContent = `Subtotal: ${formatarMoeda(subtotal)}`;
       atualizarBotoesBloqueio();
       return { subtotal, taxa, total };
@@ -1704,7 +1740,7 @@
           <div class="item-linha">
             <div class="item-descricao">
               <strong>${nomeItemSeguro}</strong>
-              ${detalhes.length > 0 ? `<p class="item-detalhes">${detalhes.join(" | ")}</p>` : ""}
+              ${detalhes.length > 0 ? `<p class="item-detalhes">${detalhes.join(" · ")}</p>` : ""}
             </div>
             <span class="item-valor">${formatarMoeda(totalItem)}</span>
           </div>
@@ -1889,7 +1925,7 @@
     }
 
     function abrirCarrinho() {
-      abrirModal(caixaCarrinho, botaoFecharCarrinhoTopo);
+      abrirModal(caixaCarrinho, botaoFechar);
       botaoCarrinho.setAttribute("aria-expanded", "true");
       botaoAbrirCarrinhoMobile.setAttribute("aria-expanded", "true");
       alturaViewportBase = window.innerHeight;
@@ -3067,7 +3103,6 @@
 
     botaoCarrinho.addEventListener("click", abrirCarrinho);
     botaoAbrirCarrinhoMobile.addEventListener("click", abrirCarrinho);
-    botaoFecharCarrinhoTopo.addEventListener("click", fecharCarrinho);
     botaoFechar.addEventListener("click", fecharCarrinho);
     botaoAbrirAdmin.addEventListener("click", abrirAdmin);
     botaoFecharAdmin.addEventListener("click", fecharAdmin);
