@@ -34,7 +34,7 @@ Muitos **quiosques e lanchonetes** perdem vendas ou demoram a atender porque o p
   </tr>
   <tr>
     <td width="30%"><b>Foco Mobile</b></td>
-    <td>Interface totalmente responsiva e otimizada para smartphones dentro do estabelecimento.</td>
+    <td>Interface totalmente responsiva e otimizada para smartphones.</td>
   </tr>
 </table>
 
