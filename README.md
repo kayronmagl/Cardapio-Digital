@@ -2,7 +2,7 @@
   <h1>Cardápio Digital - Tobias Lanches</h1>
   <p><b>Solução para gestão de produtos e integração de pedidos via WhatsApp</b></p>
   <br>
-  <a href="https://vercel.app">
+  <a href="https://cardapio-digital-tobias-lanches.vercel.app/">
     <b>VISUALIZAR PROJETO ONLINE</b>
   </a>
 </div>
