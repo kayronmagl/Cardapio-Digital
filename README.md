@@ -40,7 +40,7 @@ Muitos **quiosques e lanchonetes** perdem vendas ou demoram a atender porque o p
 
 ## Tecnologias Utilizadas
 *   **Frontend:** HTML5, CSS3 e JavaScript Vanilla (ES6+).
-*   **Backend e Banco de Dados:** Supabase (BaaS).
+*   **Backend e Banco de Dados:** Supabase (BaaS) com lógica avançada em PL/pgSQL.
 *   **Hospedagem:** Vercel.
 
 ## Configuração do Banco de Dados
