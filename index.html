@@ -28,7 +28,7 @@
 
   <section class="topo-blocos layout-shell" aria-label="Resumo inicial">
     <section class="hero" aria-label="Destaques do atendimento">
-      <p class="hero-kicker">Cardápio digital do Tobia's Lanches</p>
+      <p class="hero-kicker">Tobia's Lanches</p>
       <h2 class="hero-title">Peça rápido e sem complicação.</h2>
       <p class="hero-subtitle">Delivery, retirada e pedido no local com confirmação no WhatsApp.</p>
       <div class="hero-metas" aria-label="Informações rápidas">
@@ -47,7 +47,7 @@
         <div class="painel-horario-topo">
           <div class="painel-horario-head">
             <p class="titulo-horario">Horários de funcionamento</p>
-            <p class="horario-ajuda">Atualizado automaticamente</p>
+            <p class="horario-ajuda">Agenda da semana</p>
           </div>
           <p id="statusQuiosque" class="status-quiosque" aria-live="polite" role="status"></p>
         </div>
@@ -68,6 +68,14 @@
   </section>
 
   <nav id="menuCategorias" class="menu-categorias layout-shell" aria-label="Categorias do cardápio"></nav>
+  <section class="filtros-cardapio layout-shell" aria-label="Filtros do cardápio">
+    <label for="filtroStatusPublico">Status</label>
+    <select id="filtroStatusPublico">
+      <option value="">Todos</option>
+      <option value="disponivel">Disponíveis</option>
+      <option value="indisponivel">Indisponíveis</option>
+    </select>
+  </section>
   <p id="statusCategoria" class="sr-only" aria-live="polite"></p>
 
   <main id="areaProdutos" class="grade-produtos layout-shell" aria-live="polite"></main>
@@ -131,12 +139,10 @@
               <option value="entrega">Entrega</option>
               <option value="retirada">Retirada no local</option>
             </select>
-            <p id="ajudaTipoEntrega" class="ajuda-texto">Escolha entrega para receber no endereço ou retirada para
-              buscar
-              no quiosque.</p>
+            <p id="ajudaTipoEntrega" class="ajuda-texto">Entrega no endereço ou retirada no quiosque.</p>
             <p id="erroTipoEntrega" class="erro erro-campo oculto"></p>
 
-            <p class="aviso tempo-espera">Tempo aproximado: 20 a 40 minutos.</p>
+            <p class="aviso tempo-espera">Tempo aproximado: 20 a 40 min.</p>
             <div id="camposEntrega" class="painel-condicional oculto">
               <label for="bairroEntrega">Localidade de entrega (Iracema - CE):</label>
               <select id="bairroEntrega" data-erro-id="erroBairroEntrega" aria-describedby="erroBairroEntrega">
@@ -167,7 +173,7 @@
 
           <fieldset class="bloco-form oculto" id="blocoNoLocal">
             <legend>2. Pedido no local</legend>
-            <p class="aviso tempo-espera">Tempo aproximado: 20 a 40 minutos.</p>
+            <p class="aviso tempo-espera">Tempo aproximado: 20 a 40 min.</p>
             <label for="numeroMesa">Número da mesa:</label>
             <input type="number" id="numeroMesa" min="1" max="999" step="1" data-erro-id="erroNumeroMesa"
               aria-describedby="erroNumeroMesa" placeholder="Ex.: 3">
@@ -293,8 +299,7 @@
 
       <section id="adminLoginBloco" class="bloco-form">
         <h3 class="admin-subtitulo">Acesso</h3>
-        <p class="admin-descricao admin-descricao-login">Use seu e-mail e senha para liberar edição de produtos,
-          adicionais e combos.</p>
+        <p class="admin-descricao admin-descricao-login">Entre para editar produtos, adicionais e combos.</p>
         <form id="adminLoginForm" novalidate>
           <label for="adminEmail">E-mail</label>
           <input type="email" id="adminEmail" autocomplete="email" placeholder="email@dominio.com">
@@ -337,10 +342,9 @@
               <div class="admin-headline admin-headline-editor">
                 <p class="admin-kicker">Editor de produto</p>
                 <h3 class="admin-subtitulo">Cadastro de Produto</h3>
-                <p class="admin-descricao">Preencha os campos essenciais, revise os adicionais e salve quando o item
-                  estiver pronto para aparecer no cardápio.</p>
+                <p class="admin-descricao">Cadastre ou edite o item do cardápio.</p>
               </div>
-              <div class="admin-guia">
+              <div class="admin-guia" hidden>
                 <p class="admin-guia-titulo">Fluxo recomendado</p>
                 <ol class="admin-guia-lista">
                   <li>Cadastre ou edite o item.</li>
@@ -354,13 +358,11 @@
                 <div class="admin-campo admin-campo-completo">
                   <label for="adminNomeProduto">Nome</label>
                   <input type="text" id="adminNomeProduto" maxlength="80">
-                  <p class="admin-ajuda">Use o mesmo nome que o cliente verá no cardápio.</p>
                 </div>
 
                 <div class="admin-campo admin-campo-completo">
                   <label for="adminDescricaoProduto">Descrição</label>
                   <textarea id="adminDescricaoProduto" maxlength="180" placeholder="Descrição curta do item"></textarea>
-                  <p class="admin-ajuda">Explique o sabor, recheio ou diferencial em uma frase curta.</p>
                 </div>
 
                 <div class="admin-campo admin-campo-preco">
@@ -369,7 +371,6 @@
                     <span>R$</span>
                     <input type="number" id="adminPrecoProduto" min="0" step="0.01">
                   </div>
-                  <p class="admin-ajuda">Use ponto ou vírgula para os centavos.</p>
                 </div>
 
                 <div class="admin-campo">
@@ -377,7 +378,6 @@
                   <select id="adminCategoriaProduto">
                     <option value="">Carregando categorias...</option>
                   </select>
-                  <p class="admin-ajuda">Define em qual grupo esse item aparece no cardápio.</p>
                 </div>
               </div>
 
@@ -398,7 +398,7 @@
               </section>
 
               <div class="botoes-carrinho admin-acoes-editor">
-                <button type="button" id="botaoSalvarProduto" class="botao botao-principal">Salvar Produto</button>
+                <button type="button" id="botaoSalvarProduto" class="botao botao-principal">Salvar produto</button>
                 <button type="button" id="botaoLimparProduto" class="botao botao-secundario">Limpar</button>
               </div>
               <p id="adminProdutoMsg" class="sucesso oculto" role="status"></p>
@@ -447,7 +447,7 @@
           aria-labelledby="adminTabAdicionais" hidden>
           <section class="bloco-form admin-bloco">
             <h3 class="admin-subtitulo">Adicionais</h3>
-            <p class="admin-descricao">Mantenha os adicionais padronizados para todos os produtos.</p>
+            <p class="admin-descricao">Cadastre extras e preços.</p>
             <div id="adminListaAdicionais" class="admin-lista-adicionais"></div>
             <div class="admin-grid">
               <div>
@@ -459,8 +459,7 @@
                 <input type="number" id="adminNovoAdicionalPreco" min="0" step="0.01" placeholder="0,00">
               </div>
             </div>
-            <button type="button" id="botaoAdicionarAdicional" class="botao botao-secundario">Adicionar
-              adicional</button>
+            <button type="button" id="botaoAdicionarAdicional" class="botao botao-secundario">Salvar adicional</button>
           </section>
         </section>
 
@@ -468,7 +467,7 @@
           aria-labelledby="adminTabCombos" hidden>
           <section class="bloco-form admin-bloco">
             <h3 class="admin-subtitulo">Configuração de Combos</h3>
-            <p class="admin-descricao">Defina como os combos serão exibidos para o cliente.</p>
+            <p class="admin-descricao">Configure a categoria de combos.</p>
             <label class="checkbox-linha">
               <input type="checkbox" id="comboAtivo" checked>
               Exibir categoria Combos
@@ -484,8 +483,7 @@
             </label>
             <label for="comboDesconto">Desconto por combo (R$)</label>
             <input type="number" id="comboDesconto" min="0" step="0.01" value="0">
-            <button type="button" id="botaoSalvarCombos" class="botao botao-secundario">Salvar configuração de
-              combos</button>
+            <button type="button" id="botaoSalvarCombos" class="botao botao-secundario">Salvar combos</button>
           </section>
         </section>
 
@@ -527,7 +525,8 @@
         enderecoRetirada: "",
         bairrosComEntrega: [],
         bairrosSemEntrega: [],
-        idsIndisponiveis: []
+        idsIndisponiveis: [],
+        permitePedidosForaHorario: false
       };
 
       let horarioFuncionamento = {};
@@ -563,6 +562,64 @@
         }, {});
       }
 
+      const IDIOMA_PADRAO = "pt-BR";
+
+      function textoTraduzido(valor, fallback = "") {
+        if (valor && typeof valor === "object" && !Array.isArray(valor)) {
+          return String(valor[IDIOMA_PADRAO] || valor["pt-BR"] || valor["en-US"] || fallback || "");
+        }
+        return String(valor || fallback || "");
+      }
+
+      function criarTraducoes(texto) {
+        const valor = String(texto || "");
+        return {
+          "pt-BR": valor,
+          "en-US": valor
+        };
+      }
+
+      function formatarDescricaoProduto(descricao) {
+        const texto = String(descricao || "").trim();
+        if (!texto) {
+          return "";
+        }
+        const textoNormalizado = texto.toLocaleLowerCase("pt-BR");
+        return textoNormalizado.charAt(0).toLocaleUpperCase("pt-BR") + textoNormalizado.slice(1);
+      }
+
+      function obterConfig(configuracoes, chave) {
+        const registro = configuracoes.find((item) => item && item.key === chave);
+        return registro && registro.value && typeof registro.value === "object" ? registro.value : {};
+      }
+
+      function categoriaPermiteAdicionaisPorSlug(slug) {
+        return ["pastel", "hamburguer"].includes(String(slug || ""));
+      }
+
+      function normalizarLocalEntrega(local) {
+        const nome = textoTraduzido(local?.name || local?.nome || local, "").trim();
+        if (!nome) {
+          return null;
+        }
+        const ativa = local?.active !== false && local?.available !== false;
+        const taxaBruta = local?.fee ?? local?.taxa ?? 0;
+        const taxa = Number(taxaBruta);
+        return {
+          nome,
+          ativa,
+          taxa: Number.isFinite(taxa) && taxa >= 0 ? taxa : 0
+        };
+      }
+
+      function proximoIdProduto() {
+        const maiorId = produtos.reduce((maior, produto) => {
+          const numero = Number(produto.id);
+          return Number.isFinite(numero) ? Math.max(maior, numero) : maior;
+        }, 0);
+        return String(maiorId + 1);
+      }
+
       const CHAVE_STORAGE_CARRINHO = "tobias_lanches_carrinho_v3";
       const CHAVE_STORAGE_FORMULARIO = "tobias_lanches_form_session_v1";
       const CHAVE_STORAGE_DADOS_CLIENTE = "tobias_lanches_cliente_v1";
@@ -586,6 +643,7 @@
 
       const areaProdutos = document.getElementById("areaProdutos");
       const menuCategorias = document.getElementById("menuCategorias");
+      const filtroStatusPublico = document.getElementById("filtroStatusPublico");
       const caixaCarrinho = document.getElementById("caixaCarrinho");
       const listaCarrinho = document.getElementById("listaCarrinho");
       const valorTotal = document.getElementById("valorTotal");
@@ -904,7 +962,8 @@
       }
 
       function produtoEstaDisponivel(produto) {
-        return produto.disponivel !== false && !configuracaoQuiosque.idsIndisponiveis.includes(produto.id);
+        return produto.disponivel !== false
+          && !configuracaoQuiosque.idsIndisponiveis.map(String).includes(String(produto.id));
       }
 
       function aplicarConfigQuiosqueNaInterface() {
@@ -999,7 +1058,19 @@
       }
 
       function atualizarMapasCategorias(categorias) {
-        const categoriasValidas = categorias.filter((categoria) => categoria && categoria.slug);
+        const categoriasValidas = categorias
+          .filter((categoria) => categoria && categoria.slug)
+          .map((categoria) => {
+            const slug = String(categoria.slug);
+            return {
+              slug,
+              nome: textoTraduzido(categoria.name_translations, categoria.nome || slug),
+              ordem: Number(categoria.sort_order ?? categoria.ordem ?? 0) || 0,
+              ativa: categoria.active !== false && categoria.ativa !== false,
+              is_combo: categoria.is_combo === true,
+              permite_adicionais: categoria.permite_adicionais === true || categoriaPermiteAdicionaisPorSlug(slug)
+            };
+          });
         categoriasDetalhes = categoriasValidas;
         categoriasCatalogo = categoriasValidas.reduce((mapa, categoria) => {
           const slug = String(categoria.slug);
@@ -1007,6 +1078,7 @@
           mapa[slug] = nome;
           return mapa;
         }, {});
+        categoriasCatalogo.combo = categoriasCatalogo.combo || "Combos";
         const categoriasAtivas = categoriasValidas.filter((categoria) => categoria.ativa !== false);
         categoriasOrdem = categoriasAtivas
           .slice()
@@ -1051,29 +1123,23 @@
             adicionaisResp,
             produtosResp,
             relacoesResp,
-            combosResp,
-            quiosqueResp,
-            horarioResp
+            configuracoesResp
           ] = await Promise.all([
-            supabase.from("categorias").select("*").order("ordem", { ascending: true }),
-            supabase.from("adicionais").select("*").order("ordem", { ascending: true }),
-            supabase.from("produtos").select("*").order("id", { ascending: true }),
-            supabase.from("produto_adicionais").select("produto_id, adicional_id"),
-            supabase.from("combos_config").select("*").eq("id", 1).maybeSingle(),
-            supabase.from("quiosque_config").select("*").eq("id", 1).maybeSingle(),
-            supabase.from("horario_funcionamento").select("*").order("dia_semana", { ascending: true })
+            supabase.from("menu_categories").select("*").order("sort_order", { ascending: true }),
+            supabase.from("menu_add_ons").select("*").order("sort_order", { ascending: true }),
+            supabase.from("menu_products").select("*").order("sort_order", { ascending: true }),
+            supabase.from("menu_product_add_ons").select("product_id, add_on_id"),
+            supabase.from("menu_settings").select("key,value")
           ]);
 
           if (categoriasResp.error || adicionaisResp.error || produtosResp.error || relacoesResp.error
-            || combosResp.error || quiosqueResp.error || horarioResp.error) {
+            || configuracoesResp.error) {
             console.error("Erro ao carregar dados do Supabase", {
               categorias: categoriasResp.error,
               adicionais: adicionaisResp.error,
               produtos: produtosResp.error,
               relacoes: relacoesResp.error,
-              combos: combosResp.error,
-              quiosque: quiosqueResp.error,
-              horario: horarioResp.error
+              configuracoes: configuracoesResp.error
             });
             if (mensagemErro) {
               mensagemErro.textContent = "Não foi possível carregar o cardápio. Tente novamente.";
@@ -1093,8 +1159,8 @@
             }
             mapa[id] = {
               id,
-              nome: String(adicional.nome || id),
-              preco: Number(adicional.preco) || 0
+              nome: textoTraduzido(adicional.name_translations, adicional.nome || id),
+              preco: Number(adicional.price ?? adicional.preco) || 0
             };
             return mapa;
           }, {});
@@ -1102,43 +1168,89 @@
           const relacoes = relacoesResp.data || [];
           const adicionaisPorProduto = new Map();
           relacoes.forEach((registro) => {
-            if (!adicionaisCatalogo[registro.adicional_id]) {
+            const idProduto = String(registro.product_id || "");
+            const idAdicional = String(registro.add_on_id || "");
+            if (!idProduto || !adicionaisCatalogo[idAdicional]) {
               return;
             }
-            if (!adicionaisPorProduto.has(registro.produto_id)) {
-              adicionaisPorProduto.set(registro.produto_id, []);
+            if (!adicionaisPorProduto.has(idProduto)) {
+              adicionaisPorProduto.set(idProduto, []);
             }
-            adicionaisPorProduto.get(registro.produto_id).push(registro.adicional_id);
+            adicionaisPorProduto.get(idProduto).push(idAdicional);
           });
 
-          produtos = (produtosResp.data || []).map((item) => ({
-            id: Number(item.id) || 0,
-            nome: String(item.nome || "Item sem nome"),
-            descricao: String(item.descricao || ""),
-            preco: Number(item.preco) || 0,
-            categoria: String(item.categoria_slug || ""),
-            disponivel: item.disponivel !== false,
-            adicionais: adicionaisPorProduto.get(item.id) || []
-          })).filter((item) => item.id > 0);
-
-          if (combosResp.data) {
-            configuracaoCombos = {
-              ativo: combosResp.data.ativo !== false,
-              desconto: Math.max(0, Number(combosResp.data.desconto) || 0),
-              categoriasBase: Array.isArray(combosResp.data.categorias_base)
-                ? combosResp.data.categorias_base
-                  .map((categoria) => String(categoria))
-                  .filter((categoria) => categoria)
-                : [],
-              categoriaBebida: String(combosResp.data.categoria_bebida_slug || "")
+          const usarFallbackAdicionais = relacoes.length === 0;
+          const todosAdicionais = Object.keys(adicionaisCatalogo);
+          produtos = (produtosResp.data || []).map((item) => {
+            const idOriginal = String(item.id || "").trim();
+            const idNumerico = Number(idOriginal);
+            const categoria = String(item.category_slug || item.categoria_slug || "");
+            return {
+              id: Number.isFinite(idNumerico) ? idNumerico : idOriginal,
+              nome: textoTraduzido(item.name_translations, item.nome || "Item sem nome"),
+              descricao: textoTraduzido(item.description_translations, item.descricao || ""),
+              preco: Number(item.price ?? item.preco) || 0,
+              categoria,
+              disponivel: item.available !== false && item.disponivel !== false && item.active !== false,
+              adicionais: adicionaisPorProduto.get(idOriginal)
+                || (usarFallbackAdicionais && categoriaPermiteAdicionaisPorSlug(categoria) ? todosAdicionais : [])
             };
-          }
+          }).filter((item) => String(item.id).trim());
+
+          const configuracoes = configuracoesResp.data || [];
+          const configStore = obterConfig(configuracoes, "store");
+          const configDelivery = obterConfig(configuracoes, "delivery");
+          const configPix = obterConfig(configuracoes, "pix");
+          const configWhatsapp = obterConfig(configuracoes, "whatsapp");
+          const configHorarios = obterConfig(configuracoes, "business_hours");
+          const configOfertas = obterConfig(configuracoes, "offers");
+          const configMensagem = obterConfig(configuracoes, "order_message");
+          const marca = configStore.brand || {};
+          const negocio = configStore.business || {};
+          const local = negocio.location || {};
+          const destaque = configMensagem.destaqueInicial || {};
+          const locaisEntrega = (Array.isArray(configDelivery.locations) ? configDelivery.locations : configDelivery.neighborhoods || [])
+            .map(normalizarLocalEntrega)
+            .filter(Boolean);
+          const bairrosComEntrega = locaisEntrega.filter((localidade) => localidade.ativa).map((localidade) => localidade.nome);
+          const bairrosSemEntrega = locaisEntrega.filter((localidade) => !localidade.ativa).map((localidade) => localidade.nome);
+          const taxasPorLocalidade = locaisEntrega
+            .filter((localidade) => localidade.ativa)
+            .reduce((mapa, localidade) => {
+              mapa[localidade.nome] = localidade.taxa;
+              return mapa;
+            }, {});
+
+          const nomeMarca = textoTraduzido(marca.name, "Tobia's Lanches");
+          const subtituloMarca = textoTraduzido(marca.subtitle, "Quiosque 03 | Iracema-CE");
+          document.title = nomeMarca;
+          document.querySelector(".titulo-site").textContent = nomeMarca;
+          document.querySelector(".subtitulo-topo").textContent = subtituloMarca;
+          document.querySelector(".hero-kicker").textContent = nomeMarca;
+          document.querySelector(".hero-title").textContent = textoTraduzido(destaque.title, "Peça rápido e sem complicação.");
+          document.querySelector(".hero-subtitle").textContent = textoTraduzido(destaque.subtitle, "Delivery, retirada e pedido no local com confirmação no WhatsApp.");
+          const metas = document.querySelectorAll(".hero-meta");
+          if (metas[0]) metas[0].textContent = textoTraduzido(destaque.waitingTimeLabel, "Tempo médio: 20 a 40 min");
+          if (metas[1]) metas[1].textContent = textoTraduzido(destaque.paymentLabel, "Pagamento: Pix, cartão e dinheiro");
 
           if (categoriasProduto.length > 0) {
+            const ofertas = configOfertas.offers || configOfertas;
+            const categoriasBaseConfig = Array.isArray(ofertas.comboBaseCategories)
+              ? ofertas.comboBaseCategories
+              : ["pastel", "hamburguer"];
+            configuracaoCombos = {
+              ativo: ofertas.comboEnabled !== false,
+              desconto: Math.max(0, Number(ofertas.comboDiscount || 0) || 0),
+              categoriasBase: categoriasBaseConfig
+                .map((categoria) => String(categoria))
+                .filter((categoria) => categoria),
+              categoriaBebida: String(ofertas.comboDrinkCategory || "refrigerante")
+            };
             configuracaoCombos.categoriasBase = configuracaoCombos.categoriasBase
               .filter((categoria) => categoriasProduto.includes(categoria));
             if (configuracaoCombos.categoriasBase.length === 0) {
-              configuracaoCombos.categoriasBase = [categoriasProduto[0]];
+              configuracaoCombos.categoriasBase = categoriasProduto.filter((categoria) =>
+                ["pastel", "hamburguer"].includes(categoria));
             }
           }
 
@@ -1148,38 +1260,30 @@
               || "";
           }
 
-          if (quiosqueResp.data) {
-            configuracaoQuiosque = {
-              numeroWhatsApp: String(quiosqueResp.data.numero_whatsapp || ""),
-              chavePix: String(quiosqueResp.data.chave_pix || ""),
-              pixTitular: String(quiosqueResp.data.pix_titular || ""),
-              pixBanco: String(quiosqueResp.data.pix_banco || ""),
-              taxaEntrega: Number(quiosqueResp.data.taxa_entrega) || 0,
-              taxasPorLocalidade: normalizarTaxasPorLocalidade(quiosqueResp.data.taxas_por_localidade),
-              enderecoRetirada: String(quiosqueResp.data.endereco_retirada || ""),
-              bairrosComEntrega: Array.isArray(quiosqueResp.data.bairros_com_entrega)
-                ? quiosqueResp.data.bairros_com_entrega.map((bairro) => String(bairro))
-                : [],
-              bairrosSemEntrega: Array.isArray(quiosqueResp.data.bairros_sem_entrega)
-                ? quiosqueResp.data.bairros_sem_entrega.map((bairro) => String(bairro))
-                : [],
-              idsIndisponiveis: Array.isArray(quiosqueResp.data.ids_indisponiveis)
-                ? quiosqueResp.data.ids_indisponiveis
-                  .map((id) => Number(id))
-                  .filter((id) => Number.isFinite(id))
-                : []
-            };
-          }
+          configuracaoQuiosque = {
+            numeroWhatsApp: String(configWhatsapp.number || ""),
+            chavePix: String(configPix.key || ""),
+            pixTitular: textoTraduzido(configPix.owner, ""),
+            pixBanco: textoTraduzido(configPix.bank, ""),
+            taxaEntrega: Number(configDelivery.baseFee) || 0,
+            taxasPorLocalidade,
+            enderecoRetirada: String(negocio.pickupAddress || local.address || ""),
+            bairrosComEntrega,
+            bairrosSemEntrega,
+            idsIndisponiveis: [],
+            permitePedidosForaHorario: configHorarios.allowOrdersOutsideHours === true
+              || negocio.allowOrdersOutsideHours === true
+          };
 
           horarioFuncionamento = {};
-          (horarioResp.data || []).forEach((registro) => {
-            if (registro.ativo === false) {
+          (configHorarios.schedule || []).forEach((registro) => {
+            if (registro.enabled === false) {
               return;
             }
-            const abre = String(registro.abre || "").slice(0, 5);
-            const fecha = String(registro.fecha || "").slice(0, 5);
+            const abre = String(registro.open || registro.abre || "").slice(0, 5);
+            const fecha = String(registro.close || registro.fecha || "").slice(0, 5);
             if (abre && fecha) {
-              horarioFuncionamento[registro.dia_semana] = { abre, fecha };
+              horarioFuncionamento[Number(registro.day ?? registro.dia_semana)] = { abre, fecha };
             }
           });
 
@@ -1280,25 +1384,41 @@
         }
         realtimeChannel = supabase
           .channel("cardapio-realtime")
-          .on("postgres_changes", { event: "*", schema: "public", table: "categorias" }, agendarAtualizacaoRealtime)
-          .on("postgres_changes", { event: "*", schema: "public", table: "adicionais" }, agendarAtualizacaoRealtime)
-          .on("postgres_changes", { event: "*", schema: "public", table: "produtos" }, agendarAtualizacaoRealtime)
-          .on("postgres_changes", { event: "*", schema: "public", table: "produto_adicionais" }, agendarAtualizacaoRealtime)
-          .on("postgres_changes", { event: "*", schema: "public", table: "combos_config" }, agendarAtualizacaoRealtime)
-          .on("postgres_changes", { event: "*", schema: "public", table: "quiosque_config" }, agendarAtualizacaoRealtime)
-          .on("postgres_changes", { event: "*", schema: "public", table: "horario_funcionamento" }, agendarAtualizacaoRealtime)
+          .on("postgres_changes", { event: "*", schema: "public", table: "menu_categories" }, agendarAtualizacaoRealtime)
+          .on("postgres_changes", { event: "*", schema: "public", table: "menu_add_ons" }, agendarAtualizacaoRealtime)
+          .on("postgres_changes", { event: "*", schema: "public", table: "menu_products" }, agendarAtualizacaoRealtime)
+          .on("postgres_changes", { event: "*", schema: "public", table: "menu_product_add_ons" }, agendarAtualizacaoRealtime)
+          .on("postgres_changes", { event: "*", schema: "public", table: "menu_settings" }, agendarAtualizacaoRealtime)
           .subscribe();
+      }
+
+      function obterFiltroStatusPublico() {
+        return filtroStatusPublico?.value || "";
+      }
+
+      function produtoPassaFiltroStatusPublico(produto) {
+        const filtro = obterFiltroStatusPublico();
+        const disponivel = produtoEstaDisponivel(produto);
+        if (filtro === "disponivel") {
+          return disponivel;
+        }
+        if (filtro === "indisponivel") {
+          return !disponivel;
+        }
+        return true;
       }
 
       function obterCategoriasDisponiveis() {
         const categorias = [];
-        const produtosDisponiveis = new Set(produtos.map((produto) => produto.categoria));
+        const filtroStatus = obterFiltroStatusPublico();
+        const produtosFiltrados = produtos.filter(produtoPassaFiltroStatusPublico);
+        const produtosDisponiveis = new Set(produtosFiltrados.map((produto) => produto.categoria));
         const possuiBebida = produtos.some((produto) =>
           produto.categoria === configuracaoCombos.categoriaBebida && produtoEstaDisponivel(produto));
         const possuiBase = configuracaoCombos.categoriasBase.some((categoriaBase) =>
           produtos.some((produto) => produto.categoria === categoriaBase && produtoEstaDisponivel(produto)));
 
-        if (configuracaoCombos.ativo && possuiBebida && possuiBase) {
+        if (filtroStatus !== "indisponivel" && configuracaoCombos.ativo && possuiBebida && possuiBase) {
           categorias.push(categoriaComboSlug);
         }
 
@@ -1355,9 +1475,16 @@
         const minutosAgora = (dataAtual.getHours() * 60) + dataAtual.getMinutes();
 
         if (!agendaHoje) {
+          if (configuracaoQuiosque.permitePedidosForaHorario) {
+            return {
+              aberta: true,
+              mensagem: "Pedidos liberados",
+              detalhe: "Sem horário hoje"
+            };
+          }
           return {
             aberta: false,
-            mensagem: "Quiosque fechado hoje",
+            mensagem: "Fechado",
             detalhe: "Sem atendimento hoje"
           };
         }
@@ -1392,8 +1519,8 @@
         }
 
         return {
-          aberta: false,
-          mensagem: "Fechado no momento",
+          aberta: configuracaoQuiosque.permitePedidosForaHorario,
+          mensagem: configuracaoQuiosque.permitePedidosForaHorario ? "Pedidos liberados" : "Fechado",
           detalhe: proximaAbertura || "Sem horário disponível"
         };
       }
@@ -1489,7 +1616,7 @@
           };
         }
 
-        const produtoId = Number(item.produtoId);
+        const produtoId = String(item.produtoId ?? "");
         const produto = obterProdutoPorId(produtoId);
         if (!produto || !produtoEstaDisponivel(produto)) {
           return null;
@@ -1639,7 +1766,7 @@
         const plural = quantidadeItens === 1 ? "item" : "itens";
         cabecalho.innerHTML = `
         <h2>${escaparHtml(titulo)}</h2>
-        <p>${quantidadeItens} ${plural} no cardapio.</p>
+        <p>${quantidadeItens} ${plural} no cardápio.</p>
       `;
         areaProdutos.appendChild(cabecalho);
       }
@@ -1843,7 +1970,10 @@
           .map((idAdicional) => adicionaisCatalogo[idAdicional])
           .filter(Boolean);
         const nomeProdutoSeguro = escaparHtml(produto.nome);
-        const descricaoProdutoSegura = escaparHtml(produto.descricao);
+        const descricaoProdutoSegura = escaparHtml(formatarDescricaoProduto(produto.descricao));
+        const avisoIndisponivel = !disponivel
+          ? '<p class="aviso aviso-indisponivel">Indisponível no momento.</p>'
+          : "";
 
         const htmlAdicionais = adicionais
           .map((adicional) => {
@@ -1866,7 +1996,7 @@
         const personalizacao = disponivel
           ? `
           <details class="personalizacao">
-            <summary>Personalizar item</summary>
+            <summary>Personalizar</summary>
             <div class="add-on-list">
               ${htmlAdicionais || '<p class="aviso">Sem adicionais para este item.</p>'}
             </div>
@@ -1874,7 +2004,7 @@
             <input id="obs-item-${produto.id}" class="obs-item" type="text" maxlength="70" placeholder="Opcional" />
           </details>
         `
-          : '<p class="aviso aviso-indisponivel">Item indisponível no momento.</p>';
+          : "";
 
         const card = document.createElement("article");
         card.className = "produto-card";
@@ -1882,15 +2012,15 @@
         <div class="produto-conteudo">
           <div class="produto-topo">
             <h3>${nomeProdutoSeguro}</h3>
-            ${!disponivel ? '<span class="badge-esgotado">Esgotado</span>' : ""}
           </div>
+          ${avisoIndisponivel}
           <p class="produto-descricao">${descricaoProdutoSegura}</p>
           ${personalizacao}
         </div>
         <div class="produto-rodape">
           <span class="preco-produto">${formatarMoeda(produto.preco)}</span>
-          <button class="botao botao-principal botao-adicionar" data-id="${produto.id}" data-label-default="${disponivel ? "Adicionar" : "Indisponivel"}" type="button" ${!disponivel ? "disabled aria-disabled=\"true\"" : ""}>
-            ${disponivel ? "Adicionar" : "Indisponivel"}
+          <button class="botao botao-principal botao-adicionar" data-id="${produto.id}" data-label-default="${disponivel ? "Adicionar" : "Indisponível"}" type="button" ${!disponivel ? "disabled aria-disabled=\"true\"" : ""}>
+            ${disponivel ? "Adicionar" : "Indisponível"}
           </button>
         </div>
       `;
@@ -1992,7 +2122,9 @@
         if (!categoriaAtual) {
           const vazio = document.createElement("article");
           vazio.className = "produto-card";
-          vazio.innerHTML = "<p>Cardápio indisponível no momento.</p>";
+          vazio.innerHTML = obterFiltroStatusPublico()
+            ? "<p>Nenhum item encontrado com esse filtro.</p>"
+            : "<p>Cardápio indisponível no momento.</p>";
           areaProdutos.appendChild(vazio);
           return;
         }
@@ -2002,7 +2134,9 @@
           return;
         }
 
-        const itensDaCategoria = produtos.filter((produto) => produto.categoria === categoriaAtual);
+        const itensDaCategoria = produtos
+          .filter((produto) => produto.categoria === categoriaAtual)
+          .filter(produtoPassaFiltroStatusPublico);
         renderizarCabecalhoCategoria(categoriasCatalogo[categoriaAtual] || categoriaAtual, itensDaCategoria.length);
         itensDaCategoria.forEach((produto) => {
           areaProdutos.appendChild(criarCardProduto(produto));
@@ -2011,7 +2145,7 @@
         if (itensDaCategoria.length === 0) {
           const vazio = document.createElement("article");
           vazio.className = "produto-card";
-          vazio.innerHTML = "<p>Nenhum item cadastrado nesta categoria.</p>";
+          vazio.innerHTML = "<p>Nenhum item encontrado com esse filtro.</p>";
           areaProdutos.appendChild(vazio);
         }
 
@@ -2448,7 +2582,7 @@
           "",
           `Cliente: ${nome.value.trim()}`,
           `Atendimento: ${tipoAtendimento === "no_local" ? "No Local" : "Delivery"}`,
-          "Tempo aproximado: 20 a 40 minutos"
+          "Tempo aproximado: 20 a 40 min"
         ];
 
         if (tipoAtendimento === "no_local") {
@@ -2553,7 +2687,7 @@
         if (infoCategoria) {
           return infoCategoria.permite_adicionais === true;
         }
-        return slug === "pastel" || slug === "hamburguer";
+        return categoriaPermiteAdicionaisPorSlug(slug);
       }
 
       function renderizarChecklistAdicionaisAdmin() {
@@ -2634,7 +2768,7 @@
             const disponivel = produtoEstaDisponivel(produto);
             const nomeProdutoSeguro = escaparHtml(produto.nome);
             const descricaoProdutoSegura = produto.descricao
-              ? escaparHtml(produto.descricao)
+              ? escaparHtml(formatarDescricaoProduto(produto.descricao))
               : "Sem descrição cadastrada.";
             const totalAdicionais = Array.isArray(produto.adicionais) ? produto.adicionais.length : 0;
             const exibirTagAdicionais = categoriaPermiteAdicionais(produto.categoria);
@@ -2737,13 +2871,14 @@
 
         adminErro.classList.add("oculto");
         adminErro.textContent = "";
-        const idEdicao = Number(adminProdutoId.value);
+        const idEdicao = String(adminProdutoId.value || "").trim();
         const payload = {
-          nome: nomeProduto,
-          descricao: descricaoProduto,
-          preco: precoProduto,
-          categoria_slug: categoriaProduto,
-          disponivel: disponivelProduto
+          name_translations: criarTraducoes(nomeProduto),
+          description_translations: criarTraducoes(descricaoProduto),
+          price: precoProduto,
+          category_slug: categoriaProduto,
+          available: disponivelProduto,
+          active: true
         };
 
         let produtoSalvo = null;
@@ -2751,9 +2886,9 @@
 
         if (idEdicao) {
           const { data, error } = await supabase
-            .from("produtos")
+            .from("menu_products")
             .update(payload)
-            .eq("id", idEdicao)
+            .eq("id", String(idEdicao))
             .select()
             .single();
           if (error) {
@@ -2762,8 +2897,11 @@
             produtoSalvo = data;
           }
         } else {
+          payload.id = proximoIdProduto();
+          payload.image_url = "";
+          payload.sort_order = produtos.length + 1;
           const { data, error } = await supabase
-            .from("produtos")
+            .from("menu_products")
             .insert([payload])
             .select()
             .single();
@@ -2780,11 +2918,12 @@
           return;
         }
 
-        const produtoId = Number(produtoSalvo.id);
+        const produtoIdTexto = String(produtoSalvo.id);
+        const produtoId = Number(produtoIdTexto) || produtoIdTexto;
         const { error: erroRelacoes } = await supabase
-          .from("produto_adicionais")
+          .from("menu_product_add_ons")
           .delete()
-          .eq("produto_id", produtoId);
+          .eq("product_id", produtoIdTexto);
 
         if (erroRelacoes) {
           mostrarErroAdmin("Produto salvo, mas houve erro ao atualizar adicionais.");
@@ -2794,11 +2933,11 @@
 
         if (idsAdicionais.length > 0) {
           const relacoes = idsAdicionais.map((idAdicional) => ({
-            produto_id: produtoId,
-            adicional_id: idAdicional
+            product_id: produtoIdTexto,
+            add_on_id: idAdicional
           }));
           const { error: erroInsercaoRelacoes } = await supabase
-            .from("produto_adicionais")
+            .from("menu_product_add_ons")
             .insert(relacoes);
           if (erroInsercaoRelacoes) {
             mostrarErroAdmin("Produto salvo, mas houve erro ao salvar adicionais.");
@@ -2860,9 +2999,9 @@
         }
         const novoStatus = !produto.disponivel;
         const { error } = await supabase
-          .from("produtos")
-          .update({ disponivel: novoStatus })
-          .eq("id", produto.id);
+          .from("menu_products")
+          .update({ available: novoStatus })
+          .eq("id", String(produto.id));
         if (error) {
           mostrarErroAdmin("Não foi possível atualizar a disponibilidade.");
           console.error("Erro ao atualizar disponibilidade", error);
@@ -2878,7 +3017,7 @@
           mostrarErroAdmin("Faça login para remover produtos.");
           return;
         }
-        const id = Number(idProduto);
+        const id = String(idProduto);
         const produto = obterProdutoPorId(id);
         if (!produto) {
           return;
@@ -2889,19 +3028,29 @@
           return;
         }
 
-        const { error } = await supabase
-          .from("produtos")
+        const { error: erroRelacoesProduto } = await supabase
+          .from("menu_product_add_ons")
           .delete()
-          .eq("id", id);
+          .eq("product_id", String(produto.id));
+        if (erroRelacoesProduto) {
+          mostrarErroAdmin("Não foi possível remover vínculos do produto.");
+          console.error("Erro ao remover vínculos do produto", erroRelacoesProduto);
+          return;
+        }
+
+        const { error } = await supabase
+          .from("menu_products")
+          .delete()
+          .eq("id", String(produto.id));
         if (error) {
           mostrarErroAdmin("Não foi possível excluir o produto.");
           console.error("Erro ao excluir produto", error);
           return;
         }
 
-        const indiceProduto = produtos.findIndex((registro) => registro.id === id);
+        const indiceProduto = produtos.findIndex((registro) => String(registro.id) === String(id));
         const carrinhoAntes = clonar(carrinho);
-        produtos = produtos.filter((registro) => registro.id !== id);
+        produtos = produtos.filter((registro) => String(registro.id) !== String(id));
         carrinho = carrinho.filter((item) => String(item.produtoId) !== String(id));
         salvarCarrinhoLocal();
         aplicarAtualizacoesCardapio();
@@ -2934,8 +3083,8 @@
         }
 
         const { error } = await supabase
-          .from("adicionais")
-          .update({ nome: nomeAdicional, preco: precoAdicional })
+          .from("menu_add_ons")
+          .update({ name_translations: criarTraducoes(nomeAdicional), price: precoAdicional })
           .eq("id", idAdicional);
         if (error) {
           mostrarErroAdmin("Não foi possível atualizar o adicional.");
@@ -2976,8 +3125,18 @@
             adicionais: clonar(produto.adicionais || [])
           }));
 
+        const { error: erroRelacoesAdicional } = await supabase
+          .from("menu_product_add_ons")
+          .delete()
+          .eq("add_on_id", idAdicional);
+        if (erroRelacoesAdicional) {
+          mostrarErroAdmin("Não foi possível remover vínculos do adicional.");
+          console.error("Erro ao remover vínculos do adicional", erroRelacoesAdicional);
+          return;
+        }
+
         const { error } = await supabase
-          .from("adicionais")
+          .from("menu_add_ons")
           .delete()
           .eq("id", idAdicional);
         if (error) {
@@ -3023,8 +3182,8 @@
         }
 
         const { error } = await supabase
-          .from("adicionais")
-          .insert([{ id, nome, preco }]);
+          .from("menu_add_ons")
+          .insert([{ id, name_translations: criarTraducoes(nome), price: preco, sort_order: Object.keys(adicionaisCatalogo).length, active: true }]);
         if (error) {
           mostrarErroAdmin("Não foi possível adicionar o adicional.");
           console.error("Erro ao adicionar adicional", error);
@@ -3059,14 +3218,25 @@
         const novoConfig = {
           ativo: comboAtivo.checked,
           desconto: Math.max(0, Number(String(comboDesconto.value).replace(",", ".")) || 0),
-          categorias_base: categoriasBase,
-          categoria_bebida_slug: configuracaoCombos.categoriaBebida || "refrigerante"
+          categoriasBase,
+          categoriaBebida: configuracaoCombos.categoriaBebida || "refrigerante"
         };
 
         const { error } = await supabase
-          .from("combos_config")
-          .update(novoConfig)
-          .eq("id", 1);
+          .from("menu_settings")
+          .upsert({
+            key: "offers",
+            value: {
+              offers: {
+                combos: [],
+                discounts: [],
+                comboEnabled: novoConfig.ativo,
+                comboDiscount: novoConfig.desconto,
+                comboBaseCategories: novoConfig.categoriasBase,
+                comboDrinkCategory: novoConfig.categoriaBebida
+              }
+            }
+          }, { onConflict: "key" });
         if (error) {
           mostrarErroAdmin("Não foi possível salvar a configuração de combos.");
           console.error("Erro ao salvar combos", error);
@@ -3077,7 +3247,8 @@
           ...configuracaoCombos,
           ativo: novoConfig.ativo,
           desconto: novoConfig.desconto,
-          categoriasBase
+          categoriasBase,
+          categoriaBebida: novoConfig.categoriaBebida
         };
         aplicarAtualizacoesCardapio();
         finalizarEdicaoAdmin();
@@ -3104,8 +3275,17 @@
         atualizarVisibilidadeFeedbackAdmin();
       }
 
+      function limparMensagemProdutoAdmin() {
+        if (!adminProdutoMsg) {
+          return;
+        }
+        adminProdutoMsg.textContent = "";
+        adminProdutoMsg.classList.add("oculto");
+      }
+
       function iniciarDesfazerAdmin(operacao, texto) {
         limparDesfazerAdmin();
+        limparMensagemProdutoAdmin();
         ultimaExclusaoAdmin = operacao;
         adminAcaoMsg.textContent = `${texto} Você pode desfazer por 8 segundos.`;
         adminAcaoMsg.classList.remove("oculto");
@@ -3130,15 +3310,16 @@
         if (operacao.tipo === "produto" && operacao.produto) {
           const produto = operacao.produto;
           const payload = {
-            id: produto.id,
-            nome: produto.nome,
-            descricao: produto.descricao || "",
-            preco: produto.preco,
-            categoria_slug: produto.categoria,
-            disponivel: produto.disponivel !== false
+            id: String(produto.id),
+            name_translations: criarTraducoes(produto.nome),
+            description_translations: criarTraducoes(produto.descricao || ""),
+            price: produto.preco,
+            category_slug: produto.categoria,
+            available: produto.disponivel !== false,
+            active: true
           };
           const { error } = await supabase
-            .from("produtos")
+            .from("menu_products")
             .insert([payload]);
           if (error) {
             mostrarErroAdmin("Não foi possível desfazer a exclusão do produto.");
@@ -3148,11 +3329,11 @@
 
           if (Array.isArray(produto.adicionais) && produto.adicionais.length > 0) {
             const relacoes = produto.adicionais.map((idAdicional) => ({
-              produto_id: produto.id,
-              adicional_id: idAdicional
+              product_id: String(produto.id),
+              add_on_id: idAdicional
             }));
             const { error: erroRelacoes } = await supabase
-              .from("produto_adicionais")
+              .from("menu_product_add_ons")
               .insert(relacoes);
             if (erroRelacoes) {
               mostrarErroAdmin("Produto restaurado, mas houve erro ao recuperar adicionais.");
@@ -3160,7 +3341,7 @@
             }
           }
 
-          const jaExiste = produtos.some((produto) => produto.id === operacao.produto.id);
+          const jaExiste = produtos.some((produto) => String(produto.id) === String(operacao.produto.id));
           if (!jaExiste) {
             const indice = Math.max(0, Math.min(Number(operacao.indice) || 0, produtos.length));
             produtos.splice(indice, 0, operacao.produto);
@@ -3179,8 +3360,8 @@
         if (operacao.tipo === "adicional" && operacao.adicional) {
           const adicional = operacao.adicional;
           const { error } = await supabase
-            .from("adicionais")
-            .insert([{ id: adicional.id, nome: adicional.nome, preco: adicional.preco }]);
+            .from("menu_add_ons")
+            .insert([{ id: adicional.id, name_translations: criarTraducoes(adicional.nome), price: adicional.preco, active: true }]);
           if (error) {
             mostrarErroAdmin("Não foi possível desfazer a exclusão do adicional.");
             console.error("Erro ao desfazer adicional", error);
@@ -3190,11 +3371,11 @@
           const relacoes = Array.isArray(operacao.produtosAfetados)
             ? operacao.produtosAfetados
               .filter((registro) => Array.isArray(registro.adicionais) && registro.adicionais.includes(adicional.id))
-              .map((registro) => ({ produto_id: registro.id, adicional_id: adicional.id }))
+              .map((registro) => ({ product_id: String(registro.id), add_on_id: adicional.id }))
             : [];
           if (relacoes.length > 0) {
             const { error: erroRelacoes } = await supabase
-              .from("produto_adicionais")
+              .from("menu_product_add_ons")
               .insert(relacoes);
             if (erroRelacoes) {
               mostrarErroAdmin("Adicional restaurado, mas houve erro ao recuperar vínculos.");
@@ -3219,6 +3400,7 @@
       }
 
       function mostrarErroAdmin(texto) {
+        limparMensagemProdutoAdmin();
         adminErro.textContent = texto;
         adminErro.classList.remove("oculto");
       }
@@ -3370,8 +3552,8 @@
 
         const botaoAdicionar = alvo.closest(".botao-adicionar");
         if (botaoAdicionar) {
-          const idProduto = Number(botaoAdicionar.dataset.id);
-          const produto = produtos.find((registro) => registro.id === idProduto);
+          const idProduto = botaoAdicionar.dataset.id;
+          const produto = obterProdutoPorId(idProduto);
 
           if (!produto || !produtoEstaDisponivel(produto)) {
             return;
@@ -3496,6 +3678,12 @@
       botaoLimparProduto.addEventListener("click", limparFormularioProdutoAdmin);
       botaoAdicionarAdicional.addEventListener("click", adicionarAdicionalAdmin);
       botaoSalvarCombos.addEventListener("click", salvarConfigCombosAdmin);
+      if (filtroStatusPublico) {
+        filtroStatusPublico.addEventListener("change", () => {
+          renderizarCategorias();
+          mostrarProdutos();
+        });
+      }
       adminTabs.forEach((botao) => {
         botao.addEventListener("click", () => {
           ativarAbaAdmin(botao.dataset.adminTab);
@@ -3625,7 +3813,12 @@
 
         const validacao = validarFormulario();
         if (validacao.mensagem) {
-          mostrarErro(validacao.mensagem, !validacao.campo);
+          const erroDeCampoNoMobile = Boolean(validacao.campo && mediaTecladoMobile.matches);
+          if (erroDeCampoNoMobile) {
+            limparErro();
+          } else {
+            mostrarErro(validacao.mensagem, !validacao.campo);
+          }
           if (validacao.campo && typeof validacao.campo.focus === "function") {
             validacao.campo.focus();
           }
