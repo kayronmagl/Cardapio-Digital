@@ -293,8 +293,8 @@
 
       <section id="adminLoginBloco" class="bloco-form">
         <h3 class="admin-subtitulo">Acesso</h3>
-        <p class="admin-descricao admin-descricao-login">Use seu e-mail e senha para liberar edição de produtos,
-          adicionais e combos.</p>
+        <p class="admin-descricao admin-descricao-login">Demonstração local. Use <strong>admin@tobias.local</strong>
+          e a senha <strong>2580</strong> para editar produtos, adicionais e combos neste navegador.</p>
         <form id="adminLoginForm" novalidate>
           <label for="adminEmail">E-mail</label>
           <input type="email" id="adminEmail" autocomplete="email" placeholder="email@dominio.com">
@@ -510,13 +510,8 @@
       aria-expanded="false">Ver Carrinho</button>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
     (() => {
-      const SUPABASE_URL = "https://ffnurwfuwjsyzrmyjskv.supabase.co";
-      const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZmbnVyd2Z1d2pzeXpybXlqc2t2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0NjU4ODAsImV4cCI6MjA4OTA0MTg4MH0.AMgL0tlaQZOK4HyBXAEMHG46XaTNw1eopLX-2GFtDCA";
-      const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
       let configuracaoQuiosque = {
         numeroWhatsApp: "",
         chavePix: "",
@@ -544,6 +539,73 @@
         categoriasBase: [],
         categoriaBebida: ""
       };
+      const ADMIN_LOCAL_EMAIL_PADRAO = "admin@tobias.local";
+      const ADMIN_LOCAL_SENHA_PADRAO = "2580";
+      const CATALOGO_DEMO_PADRAO = {
+        categorias: [
+          { slug: "combo", nome: "Combos", ordem: 0, ativa: true, is_combo: true },
+          { slug: "pastel", nome: "Pastéis", ordem: 1, ativa: true, is_combo: false },
+          { slug: "hamburguer", nome: "Hambúrgueres", ordem: 2, ativa: true, is_combo: false },
+          { slug: "refrigerante", nome: "Refrigerantes", ordem: 3, ativa: true, is_combo: false }
+        ],
+        adicionais: {
+          queijo: { id: "queijo", nome: "Queijo extra", preco: 2 },
+          catupiry: { id: "catupiry", nome: "Catupiry", preco: 2.5 },
+          cheddar: { id: "cheddar", nome: "Cheddar", preco: 2 },
+          calabresa: { id: "calabresa", nome: "Calabresa", preco: 2 },
+          frango: { id: "frango", nome: "Frango", preco: 3 }
+        },
+        produtos: [
+          { id: 1, nome: "Pizza 22cm", descricao: "Misto ralado, tomate, cebola, milho e cheddar.", preco: 12, categoria: "pastel", disponivel: true, adicionais: ["queijo", "cheddar", "catupiry"] },
+          { id: 2, nome: "Moda da Casa 26cm", descricao: "Frango, queijo coalho, calabresa e catupiry.", preco: 14, categoria: "pastel", disponivel: true, adicionais: ["calabresa", "catupiry", "frango"] },
+          { id: 3, nome: "Especial da Casa 26cm", descricao: "Misto ralado, frango, carne moída, calabresa, cheiro verde, cebola, milho, catupiry e cheddar.", preco: 14, categoria: "pastel", disponivel: true, adicionais: ["queijo", "calabresa", "frango"] },
+          { id: 4, nome: "Calabresa 26cm", descricao: "Calabresa fatiada, presunto fatiado, queijo coalho fatiado, cebola, milho e cheddar.", preco: 14, categoria: "pastel", disponivel: true, adicionais: ["queijo", "calabresa", "cheddar"] },
+          { id: 5, nome: "Nordestino 30cm", descricao: "Queijo coalho fatiado, presunto fatiado, carne moída, calabresa, cebola, milho, cheddar e orégano.", preco: 17, categoria: "pastel", disponivel: true, adicionais: ["queijo", "calabresa", "cheddar"] },
+          { id: 6, nome: "Arretado 30cm", descricao: "Misto ralado, frango, carne moída, calabresa, cebola, cheiro verde, milho, cheddar e catupiry.", preco: 17, categoria: "pastel", disponivel: true, adicionais: ["queijo", "calabresa", "catupiry", "frango"] },
+          { id: 7, nome: "3 Queijos 22cm", descricao: "Queijo coalho fatiado, cheddar e catupiry.", preco: 12, categoria: "pastel", disponivel: true, adicionais: ["queijo", "cheddar", "catupiry"] },
+          { id: 8, nome: "Tudão 22cm", descricao: "Misto ralado, frango, cebola, cheiro verde, milho e catupiry.", preco: 12, categoria: "pastel", disponivel: true, adicionais: ["queijo", "catupiry", "frango"] },
+          { id: 9, nome: "Bolonhesa 26cm", descricao: "Carne moída, frango, queijo coalho fatiado, milho, tomate, cheddar e catupiry.", preco: 14, categoria: "pastel", disponivel: true, adicionais: ["queijo", "calabresa", "frango"] },
+          { id: 10, nome: "Pastel Árabe 26cm", descricao: "Carne moída, queijo coalho, tomate, cebola e limão.", preco: 14, categoria: "pastel", disponivel: true, adicionais: ["queijo", "calabresa"] },
+          { id: 11, nome: "Ponta Negra Misto", descricao: "Pão brioche, ovo, presunto, queijo, salada e molhos.", preco: 10, categoria: "hamburguer", disponivel: true, adicionais: ["queijo", "calabresa", "cheddar"] },
+          { id: 12, nome: "Smach Encanto", descricao: "Carne artesanal, cheddar, salada e molhos.", preco: 12, categoria: "hamburguer", disponivel: true, adicionais: ["queijo", "calabresa", "catupiry"] },
+          { id: 13, nome: "Majorlandia Frango", descricao: "Frango, queijo, presunto, milho, catupiry, salada e molhos.", preco: 14, categoria: "hamburguer", disponivel: true, adicionais: ["queijo", "frango"] },
+          { id: 14, nome: "Canoa Quebrada Burguer", descricao: "Carne artesanal, calabresa, queijo, presunto, catupiry e molhos.", preco: 16, categoria: "hamburguer", disponivel: true, adicionais: ["queijo", "calabresa", "catupiry"] },
+          { id: 15, nome: "Coca-Cola 1L", descricao: "Refrigerante Coca-Cola 1 litro.", preco: 10, categoria: "refrigerante", disponivel: true, adicionais: [] },
+          { id: 16, nome: "Cajuína São Geraldo 1L", descricao: "Refrigerante Cajuína São Geraldo.", preco: 10, categoria: "refrigerante", disponivel: true, adicionais: [] },
+          { id: 17, nome: "Coca-Cola Lata", descricao: "Coca-Cola tradicional em lata.", preco: 5, categoria: "refrigerante", disponivel: true, adicionais: [] },
+          { id: 18, nome: "Água sem gás", descricao: "Água mineral sem gás.", preco: 2, categoria: "refrigerante", disponivel: true, adicionais: [] }
+        ],
+        configuracaoCombos: {
+          ativo: false,
+          desconto: 0,
+          categoriasBase: ["pastel", "hamburguer"],
+          categoriaBebida: "refrigerante"
+        },
+        configuracaoQuiosque: {
+          numeroWhatsApp: "5500000000000",
+          chavePix: "seu-pix-aqui",
+          pixTitular: "Titular da demonstração",
+          pixBanco: "Banco da demonstração",
+          taxaEntrega: 2,
+          taxasPorLocalidade: {
+            "Centro": 2,
+            "Caixa D'água": 2,
+            "Holandino": 2,
+            "Campo": 2,
+            "Jatobá": 2
+          },
+          enderecoRetirada: "Endereço da demonstração, Quiosque 03 (Cidade-CE).",
+          bairrosComEntrega: ["Centro", "Caixa D'água", "Holandino", "Campo", "Jatobá"],
+          bairrosSemEntrega: ["Ema", "Bom Sucesso"],
+          idsIndisponiveis: []
+        },
+        horarioFuncionamento: {
+          0: { abre: "18:00", fecha: "23:00" },
+          4: { abre: "18:00", fecha: "23:00" },
+          5: { abre: "18:00", fecha: "23:00" },
+          6: { abre: "18:00", fecha: "23:00" }
+        }
+      };
 
       function clonar(objeto) {
         return JSON.parse(JSON.stringify(objeto));
@@ -568,6 +630,8 @@
       const CHAVE_STORAGE_DADOS_CLIENTE = "tobias_lanches_cliente_v1";
       const CHAVE_STORAGE_FORMULARIO_LEGADO = "tobias_lanches_form_v3";
       const CHAVE_SEQUENCIA_PEDIDO = "tobias_lanches_seq_";
+      const CHAVE_STORAGE_CATALOGO_DEMO = "tobias_lanches_catalogo_demo_v1";
+      const CHAVE_STORAGE_ADMIN_DEMO = "tobias_lanches_admin_demo_v1";
       const DURACAO_LEMBRAR_DADOS_MS = 24 * 60 * 60 * 1000;
       const sequenciaPedidoMemoria = Object.create(null);
 
@@ -666,6 +730,7 @@
       const adminSenha = document.getElementById("adminSenha");
       const botaoEntrarAdmin = document.getElementById("botaoEntrarAdmin");
       const adminErro = document.getElementById("adminErro");
+      const adminDescricaoLogin = document.querySelector(".admin-descricao-login");
 
       const adminProdutoId = document.getElementById("adminProdutoId");
       const adminNomeProduto = document.getElementById("adminNomeProduto");
@@ -750,6 +815,52 @@
         } catch {
           return false;
         }
+      }
+
+      function carregarCatalogoDemoLocal() {
+        try {
+          const salvo = JSON.parse(lerStorageSeguro(CHAVE_STORAGE_CATALOGO_DEMO) || "null");
+          if (!salvo || typeof salvo !== "object") {
+            return clonar(CATALOGO_DEMO_PADRAO);
+          }
+          return {
+            categorias: Array.isArray(salvo.categorias) && salvo.categorias.length > 0
+              ? salvo.categorias
+              : clonar(CATALOGO_DEMO_PADRAO.categorias),
+            adicionais: salvo.adicionais && typeof salvo.adicionais === "object" && !Array.isArray(salvo.adicionais)
+              ? salvo.adicionais
+              : clonar(CATALOGO_DEMO_PADRAO.adicionais),
+            produtos: Array.isArray(salvo.produtos) && salvo.produtos.length > 0
+              ? salvo.produtos
+              : clonar(CATALOGO_DEMO_PADRAO.produtos),
+            configuracaoCombos: salvo.configuracaoCombos && typeof salvo.configuracaoCombos === "object"
+              ? salvo.configuracaoCombos
+              : clonar(CATALOGO_DEMO_PADRAO.configuracaoCombos),
+            configuracaoQuiosque: salvo.configuracaoQuiosque && typeof salvo.configuracaoQuiosque === "object"
+              ? salvo.configuracaoQuiosque
+              : clonar(CATALOGO_DEMO_PADRAO.configuracaoQuiosque),
+            horarioFuncionamento: salvo.horarioFuncionamento && typeof salvo.horarioFuncionamento === "object"
+              ? salvo.horarioFuncionamento
+              : clonar(CATALOGO_DEMO_PADRAO.horarioFuncionamento)
+          };
+        } catch {
+          return clonar(CATALOGO_DEMO_PADRAO);
+        }
+      }
+
+      function salvarCatalogoDemoLocal() {
+        salvarStorageSeguro(CHAVE_STORAGE_CATALOGO_DEMO, JSON.stringify({
+          categorias: categoriasDetalhes,
+          adicionais: adicionaisCatalogo,
+          produtos,
+          configuracaoCombos,
+          configuracaoQuiosque,
+          horarioFuncionamento
+        }));
+      }
+
+      function proximoIdProduto() {
+        return produtos.reduce((maiorId, produto) => Math.max(maiorId, Number(produto.id) || 0), 0) + 1;
       }
 
       function lerStorageSessaoSeguro(chave) {
@@ -1046,93 +1157,39 @@
 
       async function carregarDadosSupabase() {
         try {
-          const [
-            categoriasResp,
-            adicionaisResp,
-            produtosResp,
-            relacoesResp,
-            combosResp,
-            quiosqueResp,
-            horarioResp
-          ] = await Promise.all([
-            supabase.from("categorias").select("*").order("ordem", { ascending: true }),
-            supabase.from("adicionais").select("*").order("ordem", { ascending: true }),
-            supabase.from("produtos").select("*").order("id", { ascending: true }),
-            supabase.from("produto_adicionais").select("produto_id, adicional_id"),
-            supabase.from("combos_config").select("*").eq("id", 1).maybeSingle(),
-            supabase.from("quiosque_config").select("*").eq("id", 1).maybeSingle(),
-            supabase.from("horario_funcionamento").select("*").order("dia_semana", { ascending: true })
-          ]);
-
-          if (categoriasResp.error || adicionaisResp.error || produtosResp.error || relacoesResp.error
-            || combosResp.error || quiosqueResp.error || horarioResp.error) {
-            console.error("Erro ao carregar dados do Supabase", {
-              categorias: categoriasResp.error,
-              adicionais: adicionaisResp.error,
-              produtos: produtosResp.error,
-              relacoes: relacoesResp.error,
-              combos: combosResp.error,
-              quiosque: quiosqueResp.error,
-              horario: horarioResp.error
-            });
-            if (mensagemErro) {
-              mensagemErro.textContent = "Não foi possível carregar o cardápio. Tente novamente.";
-              mensagemErro.classList.remove("oculto");
-            }
-            return false;
-          }
-
-          const categoriasData = categoriasResp.data || [];
+          const catalogoDemo = carregarCatalogoDemoLocal();
+          const categoriasData = Array.isArray(catalogoDemo.categorias)
+            ? catalogoDemo.categorias
+            : clonar(CATALOGO_DEMO_PADRAO.categorias);
           atualizarMapasCategorias(categoriasData);
           atualizarOpcoesCategoriasAdmin();
 
-          adicionaisCatalogo = (adicionaisResp.data || []).reduce((mapa, adicional) => {
-            const id = String(adicional.id || "").trim();
-            if (!id) {
-              return mapa;
-            }
-            mapa[id] = {
-              id,
-              nome: String(adicional.nome || id),
-              preco: Number(adicional.preco) || 0
-            };
-            return mapa;
-          }, {});
+          adicionaisCatalogo = catalogoDemo.adicionais && typeof catalogoDemo.adicionais === "object"
+            ? catalogoDemo.adicionais
+            : clonar(CATALOGO_DEMO_PADRAO.adicionais);
 
-          const relacoes = relacoesResp.data || [];
-          const adicionaisPorProduto = new Map();
-          relacoes.forEach((registro) => {
-            if (!adicionaisCatalogo[registro.adicional_id]) {
-              return;
-            }
-            if (!adicionaisPorProduto.has(registro.produto_id)) {
-              adicionaisPorProduto.set(registro.produto_id, []);
-            }
-            adicionaisPorProduto.get(registro.produto_id).push(registro.adicional_id);
-          });
+          produtos = Array.isArray(catalogoDemo.produtos)
+            ? catalogoDemo.produtos.map((item) => ({
+              id: Number(item.id) || 0,
+              nome: String(item.nome || "Item sem nome"),
+              descricao: String(item.descricao || ""),
+              preco: Number(item.preco) || 0,
+              categoria: String(item.categoria || ""),
+              disponivel: item.disponivel !== false,
+              adicionais: Array.isArray(item.adicionais) ? item.adicionais.filter((id) => adicionaisCatalogo[id]) : []
+            })).filter((item) => item.id > 0)
+            : clonar(CATALOGO_DEMO_PADRAO.produtos);
 
-          produtos = (produtosResp.data || []).map((item) => ({
-            id: Number(item.id) || 0,
-            nome: String(item.nome || "Item sem nome"),
-            descricao: String(item.descricao || ""),
-            preco: Number(item.preco) || 0,
-            categoria: String(item.categoria_slug || ""),
-            disponivel: item.disponivel !== false,
-            adicionais: adicionaisPorProduto.get(item.id) || []
-          })).filter((item) => item.id > 0);
-
-          if (combosResp.data) {
-            configuracaoCombos = {
-              ativo: combosResp.data.ativo !== false,
-              desconto: Math.max(0, Number(combosResp.data.desconto) || 0),
-              categoriasBase: Array.isArray(combosResp.data.categorias_base)
-                ? combosResp.data.categorias_base
-                  .map((categoria) => String(categoria))
-                  .filter((categoria) => categoria)
-                : [],
-              categoriaBebida: String(combosResp.data.categoria_bebida_slug || "")
-            };
-          }
+          configuracaoCombos = catalogoDemo.configuracaoCombos && typeof catalogoDemo.configuracaoCombos === "object"
+            ? {
+              ativo: catalogoDemo.configuracaoCombos.ativo !== false,
+              desconto: Math.max(0, Number(catalogoDemo.configuracaoCombos.desconto) || 0),
+              categoriasBase: Array.isArray(catalogoDemo.configuracaoCombos.categoriasBase)
+                ? catalogoDemo.configuracaoCombos.categoriasBase.map((categoria) => String(categoria)).filter(Boolean)
+                : clonar(CATALOGO_DEMO_PADRAO.configuracaoCombos.categoriasBase),
+              categoriaBebida: String(catalogoDemo.configuracaoCombos.categoriaBebida || "")
+            }
+            : clonar(CATALOGO_DEMO_PADRAO.configuracaoCombos);
 
           if (categoriasProduto.length > 0) {
             configuracaoCombos.categoriasBase = configuracaoCombos.categoriasBase
@@ -1148,50 +1205,44 @@
               || "";
           }
 
-          if (quiosqueResp.data) {
-            configuracaoQuiosque = {
-              numeroWhatsApp: String(quiosqueResp.data.numero_whatsapp || ""),
-              chavePix: String(quiosqueResp.data.chave_pix || ""),
-              pixTitular: String(quiosqueResp.data.pix_titular || ""),
-              pixBanco: String(quiosqueResp.data.pix_banco || ""),
-              taxaEntrega: Number(quiosqueResp.data.taxa_entrega) || 0,
-              taxasPorLocalidade: normalizarTaxasPorLocalidade(quiosqueResp.data.taxas_por_localidade),
-              enderecoRetirada: String(quiosqueResp.data.endereco_retirada || ""),
-              bairrosComEntrega: Array.isArray(quiosqueResp.data.bairros_com_entrega)
-                ? quiosqueResp.data.bairros_com_entrega.map((bairro) => String(bairro))
-                : [],
-              bairrosSemEntrega: Array.isArray(quiosqueResp.data.bairros_sem_entrega)
-                ? quiosqueResp.data.bairros_sem_entrega.map((bairro) => String(bairro))
-                : [],
-              idsIndisponiveis: Array.isArray(quiosqueResp.data.ids_indisponiveis)
-                ? quiosqueResp.data.ids_indisponiveis
-                  .map((id) => Number(id))
-                  .filter((id) => Number.isFinite(id))
-                : []
-            };
-          }
+          const quiosqueDemo = catalogoDemo.configuracaoQuiosque && typeof catalogoDemo.configuracaoQuiosque === "object"
+            ? catalogoDemo.configuracaoQuiosque
+            : CATALOGO_DEMO_PADRAO.configuracaoQuiosque;
+          configuracaoQuiosque = {
+            numeroWhatsApp: String(quiosqueDemo.numeroWhatsApp || ""),
+            chavePix: String(quiosqueDemo.chavePix || ""),
+            pixTitular: String(quiosqueDemo.pixTitular || ""),
+            pixBanco: String(quiosqueDemo.pixBanco || ""),
+            taxaEntrega: Number(quiosqueDemo.taxaEntrega) || 0,
+            taxasPorLocalidade: normalizarTaxasPorLocalidade(quiosqueDemo.taxasPorLocalidade),
+            enderecoRetirada: String(quiosqueDemo.enderecoRetirada || ""),
+            bairrosComEntrega: Array.isArray(quiosqueDemo.bairrosComEntrega)
+              ? quiosqueDemo.bairrosComEntrega.map((bairro) => String(bairro))
+              : [],
+            bairrosSemEntrega: Array.isArray(quiosqueDemo.bairrosSemEntrega)
+              ? quiosqueDemo.bairrosSemEntrega.map((bairro) => String(bairro))
+              : [],
+            idsIndisponiveis: Array.isArray(quiosqueDemo.idsIndisponiveis)
+              ? quiosqueDemo.idsIndisponiveis.map((id) => Number(id)).filter((id) => Number.isFinite(id))
+              : []
+          };
 
-          horarioFuncionamento = {};
-          (horarioResp.data || []).forEach((registro) => {
-            if (registro.ativo === false) {
-              return;
-            }
-            const abre = String(registro.abre || "").slice(0, 5);
-            const fecha = String(registro.fecha || "").slice(0, 5);
-            if (abre && fecha) {
-              horarioFuncionamento[registro.dia_semana] = { abre, fecha };
-            }
-          });
+          horarioFuncionamento = catalogoDemo.horarioFuncionamento && typeof catalogoDemo.horarioFuncionamento === "object"
+            ? catalogoDemo.horarioFuncionamento
+            : clonar(CATALOGO_DEMO_PADRAO.horarioFuncionamento);
 
           aplicarConfigQuiosqueNaInterface();
           atualizarEnderecoRetiradaUI();
           atualizarBairrosEntregaUI();
           atualizarAgendaHorarioUI();
+          if (adminDescricaoLogin) {
+            adminDescricaoLogin.innerHTML = `Demonstração local. Use <strong>${ADMIN_LOCAL_EMAIL_PADRAO}</strong> e a senha <strong>${ADMIN_LOCAL_SENHA_PADRAO}</strong> para editar produtos, adicionais e combos neste navegador.`;
+          }
           return true;
         } catch (erro) {
-          console.error("Erro inesperado ao carregar dados", erro);
+          console.error("Erro inesperado ao carregar dados locais", erro);
           if (mensagemErro) {
-            mensagemErro.textContent = "Não foi possível carregar o cardápio. Tente novamente.";
+            mensagemErro.textContent = "Não foi possível carregar a demonstração local do cardápio.";
             mensagemErro.classList.remove("oculto");
           }
           return false;
@@ -1276,18 +1327,8 @@
 
       function iniciarRealtime() {
         if (realtimeChannel) {
-          realtimeChannel.unsubscribe();
+          realtimeChannel = null;
         }
-        realtimeChannel = supabase
-          .channel("cardapio-realtime")
-          .on("postgres_changes", { event: "*", schema: "public", table: "categorias" }, agendarAtualizacaoRealtime)
-          .on("postgres_changes", { event: "*", schema: "public", table: "adicionais" }, agendarAtualizacaoRealtime)
-          .on("postgres_changes", { event: "*", schema: "public", table: "produtos" }, agendarAtualizacaoRealtime)
-          .on("postgres_changes", { event: "*", schema: "public", table: "produto_adicionais" }, agendarAtualizacaoRealtime)
-          .on("postgres_changes", { event: "*", schema: "public", table: "combos_config" }, agendarAtualizacaoRealtime)
-          .on("postgres_changes", { event: "*", schema: "public", table: "quiosque_config" }, agendarAtualizacaoRealtime)
-          .on("postgres_changes", { event: "*", schema: "public", table: "horario_funcionamento" }, agendarAtualizacaoRealtime)
-          .subscribe();
       }
 
       function obterCategoriasDisponiveis() {
@@ -2696,6 +2737,7 @@
       }
 
       function aplicarAtualizacoesCardapio() {
+        salvarCatalogoDemoLocal();
         renderizarCategorias();
         mostrarProdutos();
         atualizarCarrinho();
@@ -2745,70 +2787,8 @@
           categoria_slug: categoriaProduto,
           disponivel: disponivelProduto
         };
-
-        let produtoSalvo = null;
-        let erroOperacao = null;
-
-        if (idEdicao) {
-          const { data, error } = await supabase
-            .from("produtos")
-            .update(payload)
-            .eq("id", idEdicao)
-            .select()
-            .single();
-          if (error) {
-            erroOperacao = error;
-          } else {
-            produtoSalvo = data;
-          }
-        } else {
-          const { data, error } = await supabase
-            .from("produtos")
-            .insert([payload])
-            .select()
-            .single();
-          if (error) {
-            erroOperacao = error;
-          } else {
-            produtoSalvo = data;
-          }
-        }
-
-        if (erroOperacao || !produtoSalvo) {
-          mostrarErroAdmin("Não foi possível salvar o produto. Tente novamente.");
-          console.error("Erro ao salvar produto", erroOperacao);
-          return;
-        }
-
-        const produtoId = Number(produtoSalvo.id);
-        const { error: erroRelacoes } = await supabase
-          .from("produto_adicionais")
-          .delete()
-          .eq("produto_id", produtoId);
-
-        if (erroRelacoes) {
-          mostrarErroAdmin("Produto salvo, mas houve erro ao atualizar adicionais.");
-          console.error("Erro ao limpar adicionais", erroRelacoes);
-          return;
-        }
-
-        if (idsAdicionais.length > 0) {
-          const relacoes = idsAdicionais.map((idAdicional) => ({
-            produto_id: produtoId,
-            adicional_id: idAdicional
-          }));
-          const { error: erroInsercaoRelacoes } = await supabase
-            .from("produto_adicionais")
-            .insert(relacoes);
-          if (erroInsercaoRelacoes) {
-            mostrarErroAdmin("Produto salvo, mas houve erro ao salvar adicionais.");
-            console.error("Erro ao inserir adicionais", erroInsercaoRelacoes);
-            return;
-          }
-        }
-
         const produtoAtualizado = {
-          id: produtoId,
+          id: idEdicao || proximoIdProduto(),
           nome: nomeProduto,
           descricao: descricaoProduto,
           preco: precoProduto,
@@ -2859,15 +2839,6 @@
           return;
         }
         const novoStatus = !produto.disponivel;
-        const { error } = await supabase
-          .from("produtos")
-          .update({ disponivel: novoStatus })
-          .eq("id", produto.id);
-        if (error) {
-          mostrarErroAdmin("Não foi possível atualizar a disponibilidade.");
-          console.error("Erro ao atualizar disponibilidade", error);
-          return;
-        }
         produto.disponivel = novoStatus;
         aplicarAtualizacoesCardapio();
         finalizarEdicaoAdmin();
@@ -2886,16 +2857,6 @@
 
         const confirmou = window.confirm(`Excluir o produto "${produto.nome}"?`);
         if (!confirmou) {
-          return;
-        }
-
-        const { error } = await supabase
-          .from("produtos")
-          .delete()
-          .eq("id", id);
-        if (error) {
-          mostrarErroAdmin("Não foi possível excluir o produto.");
-          console.error("Erro ao excluir produto", error);
           return;
         }
 
@@ -2933,16 +2894,6 @@
           return;
         }
 
-        const { error } = await supabase
-          .from("adicionais")
-          .update({ nome: nomeAdicional, preco: precoAdicional })
-          .eq("id", idAdicional);
-        if (error) {
-          mostrarErroAdmin("Não foi possível atualizar o adicional.");
-          console.error("Erro ao atualizar adicional", error);
-          return;
-        }
-
         adicionaisCatalogo[idAdicional] = {
           id: idAdicional,
           nome: nomeAdicional,
@@ -2975,16 +2926,6 @@
             id: produto.id,
             adicionais: clonar(produto.adicionais || [])
           }));
-
-        const { error } = await supabase
-          .from("adicionais")
-          .delete()
-          .eq("id", idAdicional);
-        if (error) {
-          mostrarErroAdmin("Não foi possível excluir o adicional.");
-          console.error("Erro ao excluir adicional", error);
-          return;
-        }
 
         delete adicionaisCatalogo[idAdicional];
         produtos = produtos.map((produto) => ({
@@ -3022,15 +2963,6 @@
           sufixo += 1;
         }
 
-        const { error } = await supabase
-          .from("adicionais")
-          .insert([{ id, nome, preco }]);
-        if (error) {
-          mostrarErroAdmin("Não foi possível adicionar o adicional.");
-          console.error("Erro ao adicionar adicional", error);
-          return;
-        }
-
         adicionaisCatalogo[id] = { id, nome, preco };
         adminErro.textContent = "";
         adminErro.classList.add("oculto");
@@ -3062,16 +2994,6 @@
           categorias_base: categoriasBase,
           categoria_bebida_slug: configuracaoCombos.categoriaBebida || "refrigerante"
         };
-
-        const { error } = await supabase
-          .from("combos_config")
-          .update(novoConfig)
-          .eq("id", 1);
-        if (error) {
-          mostrarErroAdmin("Não foi possível salvar a configuração de combos.");
-          console.error("Erro ao salvar combos", error);
-          return;
-        }
 
         configuracaoCombos = {
           ...configuracaoCombos,
@@ -3128,38 +3050,6 @@
         limparDesfazerAdmin();
 
         if (operacao.tipo === "produto" && operacao.produto) {
-          const produto = operacao.produto;
-          const payload = {
-            id: produto.id,
-            nome: produto.nome,
-            descricao: produto.descricao || "",
-            preco: produto.preco,
-            categoria_slug: produto.categoria,
-            disponivel: produto.disponivel !== false
-          };
-          const { error } = await supabase
-            .from("produtos")
-            .insert([payload]);
-          if (error) {
-            mostrarErroAdmin("Não foi possível desfazer a exclusão do produto.");
-            console.error("Erro ao desfazer produto", error);
-            return;
-          }
-
-          if (Array.isArray(produto.adicionais) && produto.adicionais.length > 0) {
-            const relacoes = produto.adicionais.map((idAdicional) => ({
-              produto_id: produto.id,
-              adicional_id: idAdicional
-            }));
-            const { error: erroRelacoes } = await supabase
-              .from("produto_adicionais")
-              .insert(relacoes);
-            if (erroRelacoes) {
-              mostrarErroAdmin("Produto restaurado, mas houve erro ao recuperar adicionais.");
-              console.error("Erro ao restaurar adicionais", erroRelacoes);
-            }
-          }
-
           const jaExiste = produtos.some((produto) => produto.id === operacao.produto.id);
           if (!jaExiste) {
             const indice = Math.max(0, Math.min(Number(operacao.indice) || 0, produtos.length));
@@ -3178,30 +3068,6 @@
 
         if (operacao.tipo === "adicional" && operacao.adicional) {
           const adicional = operacao.adicional;
-          const { error } = await supabase
-            .from("adicionais")
-            .insert([{ id: adicional.id, nome: adicional.nome, preco: adicional.preco }]);
-          if (error) {
-            mostrarErroAdmin("Não foi possível desfazer a exclusão do adicional.");
-            console.error("Erro ao desfazer adicional", error);
-            return;
-          }
-
-          const relacoes = Array.isArray(operacao.produtosAfetados)
-            ? operacao.produtosAfetados
-              .filter((registro) => Array.isArray(registro.adicionais) && registro.adicionais.includes(adicional.id))
-              .map((registro) => ({ produto_id: registro.id, adicional_id: adicional.id }))
-            : [];
-          if (relacoes.length > 0) {
-            const { error: erroRelacoes } = await supabase
-              .from("produto_adicionais")
-              .insert(relacoes);
-            if (erroRelacoes) {
-              mostrarErroAdmin("Adicional restaurado, mas houve erro ao recuperar vínculos.");
-              console.error("Erro ao restaurar vínculos", erroRelacoes);
-            }
-          }
-
           adicionaisCatalogo[adicional.id] = adicional;
           if (Array.isArray(operacao.produtosAfetados)) {
             operacao.produtosAfetados.forEach((registro) => {
@@ -3276,13 +3142,12 @@
           return;
         }
 
-        const { error } = await supabase.auth.signInWithPassword({ email, password: senha });
-        if (error) {
+        if (email !== ADMIN_LOCAL_EMAIL_PADRAO || senha !== ADMIN_LOCAL_SENHA_PADRAO) {
           mostrarErroAdmin("Credenciais inválidas. Verifique e tente novamente.");
-          console.error("Erro ao autenticar", error);
           return;
         }
 
+        salvarStorageSeguro(CHAVE_STORAGE_ADMIN_DEMO, "1");
         adminAutenticado = true;
         if (adminSenha) {
           adminSenha.value = "";
@@ -3292,7 +3157,7 @@
       }
 
       async function sairAdmin() {
-        await supabase.auth.signOut();
+        removerStorageSeguro(CHAVE_STORAGE_ADMIN_DEMO);
         adminAutenticado = false;
         aplicarEstadoAdmin();
         limparFormularioProdutoAdmin();
@@ -3713,8 +3578,7 @@
 
       async function inicializarAplicacao() {
         await carregarDadosSupabase();
-        const { data } = await supabase.auth.getSession();
-        adminAutenticado = Boolean(data?.session);
+        adminAutenticado = lerStorageSeguro(CHAVE_STORAGE_ADMIN_DEMO) === "1";
         aplicarEstadoAdmin();
         limparFormularioProdutoAdmin();
 
@@ -3731,14 +3595,7 @@
         atualizarCarrinho();
         atualizarStatusQuiosque();
         atualizarBotoesBloqueio();
-
-        iniciarRealtime();
       }
-
-      supabase.auth.onAuthStateChange((_evento, sessao) => {
-        adminAutenticado = Boolean(sessao);
-        aplicarEstadoAdmin();
-      });
 
       inicializarAplicacao();
 
