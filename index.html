@@ -1155,7 +1155,7 @@
         }
       }
 
-      async function carregarDadosSupabase() {
+      async function carregarDadosDemoLocal() {
         try {
           const catalogoDemo = carregarCatalogoDemoLocal();
           const categoriasData = Array.isArray(catalogoDemo.categorias)
@@ -1249,10 +1249,6 @@
         }
       }
 
-      const REALTIME_DEBOUNCE_MS = 400;
-      let realtimeTimer = null;
-      let realtimeChannel = null;
-      let realtimePendente = false;
       let adminEdicaoAtiva = false;
 
       function adminTemFocoEmEdicao() {
@@ -1267,68 +1263,8 @@
         return tag === "input" || tag === "textarea" || tag === "select";
       }
 
-      function podeAtualizarRealtimeAgora() {
-        if (!adminAutenticado) {
-          return true;
-        }
-        if (!painelAdmin.classList.contains("show")) {
-          return true;
-        }
-        if (adminEdicaoAtiva || adminTemFocoEmEdicao()) {
-          return false;
-        }
-        return true;
-      }
-
       function finalizarEdicaoAdmin() {
         adminEdicaoAtiva = false;
-        if (realtimePendente && podeAtualizarRealtimeAgora()) {
-          realtimePendente = false;
-          agendarAtualizacaoRealtime();
-        }
-      }
-
-      async function atualizarInterfaceAposDados() {
-        renderizarCategorias();
-        mostrarProdutos();
-        atualizarCarrinho();
-        atualizarStatusQuiosque();
-        atualizarBotoesBloqueio();
-
-        if (atendimentoAtual() === "delivery" && tipoEntrega.value === "entrega") {
-          atualizarTaxaInfo();
-        }
-
-        if (adminAutenticado) {
-          renderizarChecklistAdicionaisAdmin();
-          renderizarListaProdutosAdmin({ resetarRolagem: true });
-          renderizarListaAdicionaisAdmin();
-          preencherConfigCombosAdmin();
-          atualizarResumoAdmin();
-          ativarAbaAdmin(adminAbaAtual);
-        }
-      }
-
-      function agendarAtualizacaoRealtime() {
-        if (!podeAtualizarRealtimeAgora()) {
-          realtimePendente = true;
-          return;
-        }
-        if (realtimeTimer) {
-          clearTimeout(realtimeTimer);
-        }
-        realtimeTimer = setTimeout(async () => {
-          const ok = await carregarDadosSupabase();
-          if (ok) {
-            atualizarInterfaceAposDados();
-          }
-        }, REALTIME_DEBOUNCE_MS);
-      }
-
-      function iniciarRealtime() {
-        if (realtimeChannel) {
-          realtimeChannel = null;
-        }
       }
 
       function obterCategoriasDisponiveis() {
@@ -2780,13 +2716,6 @@
         adminErro.classList.add("oculto");
         adminErro.textContent = "";
         const idEdicao = Number(adminProdutoId.value);
-        const payload = {
-          nome: nomeProduto,
-          descricao: descricaoProduto,
-          preco: precoProduto,
-          categoria_slug: categoriaProduto,
-          disponivel: disponivelProduto
-        };
         const produtoAtualizado = {
           id: idEdicao || proximoIdProduto(),
           nome: nomeProduto,
@@ -3577,7 +3506,7 @@
 
 
       async function inicializarAplicacao() {
-        await carregarDadosSupabase();
+        await carregarDadosDemoLocal();
         adminAutenticado = lerStorageSeguro(CHAVE_STORAGE_ADMIN_DEMO) === "1";
         aplicarEstadoAdmin();
         limparFormularioProdutoAdmin();
