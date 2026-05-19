@@ -2,7 +2,7 @@
   <h1>Cardápio Digital - Tobias Lanches</h1>
   <p><b>Solução para gestão de produtos e integração de pedidos via WhatsApp</b></p>
   <br>
-  <p><b>VERSÃO ANTERIOR / DEMONSTRAÇÃO LOCAL</b></p>
+  <p><b>VERSÃO ANTERIOR</b></p>
 </div>
 
 
