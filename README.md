@@ -3,6 +3,8 @@
   <p><b>Solução para gestão de produtos e integração de pedidos via WhatsApp</b></p>
   <br>
   <a href="https://democardapio-digital-tobias-lanches.vercel.app/"><b>VER PROJETO</b></a>
+  <br><br>
+  <p>Esta foi a primeira versão do projeto. A evolução dessa solução continuou no <a href="https://github.com/kayronmagl/Cardapio-Digital-v2.0"><b>Cardápio Digital v2.0</b></a>.</p>
 </div>
 
 ## **Sobre o Projeto**
