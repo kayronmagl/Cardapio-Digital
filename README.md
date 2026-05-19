@@ -2,9 +2,8 @@
   <h1>Cardápio Digital - Tobias Lanches</h1>
   <p><b>Solução para gestão de produtos e integração de pedidos via WhatsApp</b></p>
   <br>
-  <p><b>VERSÃO ANTERIOR</b></p>
+  <a href="https://democardapio-digital-tobias-lanches.vercel.app/"><b>VER PROJETO</b></a>
 </div>
-
 
 ## **Sobre o Projeto**
 Criei este projeto com um objetivo bem claro: resolver a confusão dos pedidos por WhatsApp. Eu queria algo que fosse além de um PDF estático, uma ferramenta em que o cliente pudesse navegar com facilidade e que me desse a liberdade de alterar um preço ou trocar a descrição de um lanche sem precisar mexer em uma única linha de código.
@@ -37,9 +36,9 @@ Muitos **quiosques e lanchonetes** perdem vendas ou demoram a atender porque o p
 </table>
 
 ## Tecnologias Utilizadas
-*   **Frontend:** HTML5, CSS3 e JavaScript Vanilla.
-*   **Persistência local:** `localStorage` para manter os dados da demonstração neste navegador.
-*   **Execução:** demonstração local da primeira versão do sistema.
+* **Frontend:** HTML5, CSS3 e JavaScript Vanilla.
+* **Persistência local:** `localStorage` para manter os dados da demonstração neste navegador.
+* **Execução:** demonstração local da primeira versão do sistema.
 
 ## Configuração da Demonstração
 Esta versão não depende de banco de dados nem de deploy online para funcionar. O objetivo aqui é preservar a primeira iteração do projeto como demonstração local, com dados de demonstração e edição no próprio navegador.
