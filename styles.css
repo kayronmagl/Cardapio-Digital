@@ -298,6 +298,7 @@ body {
   border-radius: var(--radius-sm);
   padding: 0.5rem 0.6rem;
   background: rgba(255, 255, 255, 0.02);
+  align-self: start;
 }
 
 .personalizacao summary {
@@ -1827,7 +1828,7 @@ body {
   margin-top: var(--space-3);
   padding: var(--space-3) 0 var(--space-5);
   gap: var(--space-3);
-  align-items: stretch;
+  align-items: start;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
@@ -1836,7 +1837,7 @@ body {
 }
 
 .produto-card {
-  height: 100%;
+  height: auto;
   border-radius: var(--radius-lg);
 }
 
@@ -1961,6 +1962,7 @@ body {
   .grade-produtos {
     padding: 1.3rem 0 1.5rem;
     gap: 0.82rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .caixa-centro {
@@ -2007,7 +2009,13 @@ body {
   }
 
   .produto-card {
-    min-height: 328px;
+    min-height: 0;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1180px) {
+  .grade-produtos {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -2821,13 +2829,20 @@ body {
 }
 
 .admin-tabs {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.28rem;
+  flex-wrap: nowrap;
   position: sticky;
   top: 0.15rem;
   z-index: 8;
-  padding: 0.45rem 0.1rem;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  padding: 0.28rem;
+  overflow-x: auto;
+  scrollbar-width: none;
   background: linear-gradient(180deg, rgba(18, 18, 18, 0.98), rgba(9, 9, 9, 0.9));
   border-radius: var(--radius-md);
   backdrop-filter: blur(6px);
@@ -2837,13 +2852,21 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
+.admin-tabs::-webkit-scrollbar {
+  display: none;
+}
+
 .admin-tab {
+  flex: 0 0 auto;
   border: 1px solid rgba(255, 224, 138, 0.22);
   background: rgba(255, 255, 255, 0.03);
   color: rgba(255, 224, 138, 0.86);
   border-radius: var(--radius-pill);
-  padding: 0.4rem 0.8rem;
-  font-size: 0.84rem;
+  min-height: 34px;
+  padding: 0.34rem 0.7rem;
+  font-size: 0.8rem;
+  line-height: 1;
+  white-space: nowrap;
   cursor: pointer;
   transition: border-color 0.18s ease, background-color 0.18s ease, transform 0.18s ease;
 }
@@ -3322,7 +3345,7 @@ body {
 
   .admin-tabs {
     top: 3.3rem;
-    padding: 0.42rem 0.08rem;
+    padding: 0.26rem;
   }
 
   .admin-topo-descricao {
@@ -3420,9 +3443,12 @@ body {
   }
 
   .admin-tab {
-    flex: 1 1 calc(33.33% - 0.3rem);
+    flex: 0 0 auto;
     text-align: center;
-    min-width: 92px;
+    min-width: 0;
+    min-height: 32px;
+    padding: 0.32rem 0.58rem;
+    font-size: 0.76rem;
   }
 
   .admin-topo {
@@ -3432,8 +3458,8 @@ body {
 
   .admin-tabs {
     top: 3.1rem;
-    gap: 0.42rem;
-    padding: 0.4rem 0.05rem;
+    gap: 0.22rem;
+    padding: 0.22rem;
   }
 
   .admin-topo-kicker {
@@ -3742,6 +3768,7 @@ summary:focus-visible {
   display: grid;
   gap: 0.55rem;
   flex: 1 1 auto;
+  align-content: start;
 }
 
 .produto-descricao {
