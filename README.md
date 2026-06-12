@@ -13,7 +13,7 @@ Criei este projeto com um objetivo bem claro: resolver a confusão dos pedidos p
 
 ## Por que construí isso?
 
-Muitos **quiosques e lanchonetes** perdem vendas ou demoram a atender porque o processo é manual demais. Minha ideia foi centralizar tudo em uma interface web simples e rápida que já envia o pedido pronto para o atendente. O foco aqui é a experiência de quem está com fome: abrir o link, escolher o que quer e finalizar o pedido sem complicação.
+Em razão de testar meus conhecimentos em HTML, CSS E JS que adquiri ao longo do tempo, pensei em realizar um projeto que sanasse uma dor relativamente comum localmente, e notei que muitos **quiosques e lanchonetes** perdem vendas ou demoram a atender porque o processo é manual demais. Minha ideia foi centralizar tudo em uma interface web simples e rápida que já envia o pedido pronto para o atendente. O foco aqui é a experiência de quem está com fome: abrir o link, escolher o que quer e finalizar o pedido sem complicação.
 
 ## Funcionalidades Principais
 
