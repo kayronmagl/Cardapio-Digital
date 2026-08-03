@@ -60,7 +60,7 @@ Desde a primeira versão, a experiência foi pensada para uso prático em smartp
 ### Frontend
 - HTML5
 - CSS3
-- JavaScript Vanilla
+- JavaScript
 
 ### Persistência da demonstração
 - `localStorage`
