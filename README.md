@@ -28,6 +28,16 @@
   </p>
 </div>
 
+
+<div align="center">
+  <img
+    width="72%"
+    height="1"
+    src="https://capsule-render.vercel.app/api?type=rect&height=1&color=0:5C5C5C,50:828282,100:5C5C5C"
+    alt=""
+  />
+</div>
+
 <br>
 
 ## Sobre o Projeto
