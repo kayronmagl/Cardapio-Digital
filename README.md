@@ -208,7 +208,7 @@ O objetivo aqui é manter a base original da solução totalmente navegável do 
 
 ## Licença e Uso
 
-Este projeto é disponibilizado exclusivamente para fins de visualização, consulta de código e portfólio.
+Este projeto está congelado e agora é disponibilizado exclusivamente para fins de visualização, consulta de código e portfólio.
 
 Não são permitidos sob nenhuma hipótese:
 * Distribuição de cópias sem prévia autorização.
